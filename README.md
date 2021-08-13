@@ -34,6 +34,9 @@ http://localhost:8000/demo1.html
 
 http://localhost:8000/demo2.html
 
+_To generate minified JavaScript w/o sourcemaps, just leave off the flags when running Transcrypt:_  
+(venv) $ `transcrypt src/demo2` 
+
 ---
 
 ## Reference links:
