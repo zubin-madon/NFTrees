@@ -9,7 +9,7 @@ $ `python3.9 -m venv venv`
 $ `source ./venv/bin/activate`
 
 _For Windows:_  
-\> `py -3.7 -m venv venv`  
+\> `py -3.9 -m venv venv`  
 \> `.\venv\Scripts\activate`
 
 _Install Transcrypt:_  
