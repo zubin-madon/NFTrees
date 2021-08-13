@@ -34,3 +34,6 @@ http://localhost:8000/demo1.html
 
 http://localhost:8000/demo2.html
 
+## Reference links:
+https://github.com/QQuick/Transcrypt/blob/master/transcrypt/modules/turtle/__init__.py  
+https://github.com/bunkahle/Transcrypt-Examples/tree/master/turtle  
