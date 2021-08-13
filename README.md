@@ -3,7 +3,7 @@ Create Trees Using Python Turtle in Web
 
 ---
 
-### Setup Environment
+### Setup Virtual Environment
 _For Linux/Mac:_  
 $ `python3.9 -m venv venv`  
 $ `source ./venv/bin/activate`
