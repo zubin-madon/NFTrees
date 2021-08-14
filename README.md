@@ -22,15 +22,15 @@ $
 ---
 
 ### demo1 - Snowflake
-(venv) $ `transcrypt --nomin --map src/demo1`  
-(venv) $ `python -m http.server -d ./src`
+(venv) $ `transcrypt --nomin --map src/demos/demo1`  
+(venv) $ `python -m http.server -d ./src/demos`
 
 http://localhost:8000/demo1.html
 
 
 ### demo2 - Tree (with user input)
-(venv) $ `transcrypt --nomin --map src/demo2`  
-(venv) $ `python -m http.server -d ./src`
+(venv) $ `transcrypt --nomin --map src/demos/demo2`  
+(venv) $ `python -m http.server -d ./src/demos`
 
 http://localhost:8000/demo2.html
 
