@@ -19,6 +19,7 @@ ETHERSCAN_KEY = 'C431S5DRCQ7XWIXT2144ZFT9IYBJKKG1VK'
 
 DEFAULT_ADDRESS = test_data['vip4']
 # __pragma__ ('noskip')
+
 # __pragma__ ('ecom')
 #?DEFAULT_ADDRESS = '0x148e2ED011A9EAAa200795F62889D68153EEacdE'
 # __pragma__ ('noecom')
@@ -80,6 +81,7 @@ if __name__ == '__main__':
 
     nft = NFTData()
     nft.get_data()
+    # print(nft.data)
     print("nft_tokens_list:", nft.nft_tokens_list)
     print("from_address_list:", nft.from_address_list)
     print("token_name_list:", nft.token_name_list)
