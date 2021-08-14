@@ -37,6 +37,11 @@ http://localhost:8000/demo2.html
 _To generate minified JavaScript w/o sourcemaps, just leave off the flags when running Transcrypt:_  
 (venv) $ `transcrypt src/demo2` 
 
+
+### Main App
+- _**nft_art.py**_ - entry point
+- _**tree_builders.py**_ - tree building algorithms
+- _**nft_data.py**_ - Class to retrieve and parse NFT data (will work on both server & client)
 ---
 
 ## Reference links:
