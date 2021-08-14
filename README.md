@@ -40,5 +40,8 @@ _To generate minified JavaScript w/o sourcemaps, just leave off the flags when r
 ---
 
 ## Reference links:
-https://github.com/QQuick/Transcrypt/blob/master/transcrypt/modules/turtle/__init__.py  
-https://github.com/bunkahle/Transcrypt-Examples/tree/master/turtle  
+- Transcrypt Turtle source code:  
+  https://github.com/QQuick/Transcrypt/blob/master/transcrypt/modules/turtle/__init__.py  
+
+- Starting point for demo2:  
+  https://github.com/bunkahle/Transcrypt-Examples/tree/master/turtle  
