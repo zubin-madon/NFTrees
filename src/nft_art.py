@@ -241,4 +241,12 @@ def main():
 
 
 if __name__ == '__main__':
+    # __pragma__ ('skip')
+    import os
+    from nft_data import ETHERSCAN_KEY
+    try:
+        os.environ['ETHERSCAN_KEY'] = ETHERSCAN_KEY
+    except Exception as ex:
+        print(ex)
+    # __pragma__ ('noskip')
     main()
