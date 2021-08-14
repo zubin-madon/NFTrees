@@ -42,6 +42,8 @@ _To generate minified JavaScript w/o sourcemaps, just leave off the flags when r
 - _**nft_art.py**_ - entry point
 - _**tree_builders.py**_ - tree building algorithms
 - _**nft_data.py**_ - Class to retrieve and parse NFT data (will work on both server & client)
+- _**nft_server.py**_ - FastAPI REST server  
+  (venv) $ `uvicorn  --app-dir src nft_server:app --reload`  
 ---
 
 ## Reference links:
