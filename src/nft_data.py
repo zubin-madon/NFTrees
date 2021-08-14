@@ -95,5 +95,5 @@ if __name__ == '__main__':
 '''
     nft = NFTData(address)
     nft.get_data()
-    return jsonify(dict(address=nft.address, data=nft.data))
+    return jsonify(address=nft.address, data=nft.data)
 '''
