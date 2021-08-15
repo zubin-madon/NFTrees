@@ -284,6 +284,7 @@ def asym_roots(nib_name, ROOTS, length, levels, angle, root_palette, pensize):
         nib_name.color(get_color(root_palette))
         if len(ROOTS) == 0:
             nib_name.up()
+            return
         else:
             nib_name.down()
             nib_name.color(get_color(root_palette))
