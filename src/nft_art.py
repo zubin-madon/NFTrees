@@ -6,14 +6,47 @@ import math
 import tree_builders as tb
 
 
-# Transcrypt random does not have randrange so we will monkeypatch a version of it
+# Transcrypt random does not have randrange so we monkeypatch it
 # __pragma__ ('ecom')
 '''?
-def randrange(start, end, step):
+def random_randrange(start, end, step):
     rand = random.randint(start, end-1)
-    return rand - rand%step + start
+    adj_rand = rand - (rand%step) + (start%step)
+    # print(start, end, step, rand, adj_rand)
+    return adj_rand
 
-random.randrange = randrange
+random.randrange = random_randrange
+?'''
+# __pragma__ ('noecom')
+
+# Transcrypt turtle does not have write so we monkeypatch it
+# __pragma__ ('ecom')
+'''?
+from turtle import _svg
+from turtle import _ns
+from turtle import _offset
+
+turtle._text = []
+
+def turtle_reset_text():
+    for text in turtle._text:
+        _svg.removeChild (text)
+        turtle._text = []
+    
+turtle.reset_text = turtle_reset_text
+
+def turtle_write(self, txt):
+    text = document.createElementNS(_ns, 'text')
+    text.setAttribute ('x', self.pos()[0] + _offset[0])
+    text.setAttribute ('y', self.pos()[1] + _offset[1])
+    text.setAttribute ('fill', self._pencolor)
+    text.setAttribute ('font-family', 'RootBeer')
+    text.setAttribute ('font-size', '14')
+    text.setAttribute ('font-weight', 'bold')
+    text.setAttribute ('align', 'left')
+    text.innerHTML = txt
+    _svg.appendChild(text)
+    turtle._text.append (text)
 ?'''
 # __pragma__ ('noecom')
 
@@ -47,10 +80,17 @@ def create_turtles():
         nib.hideturtle()  # __:skip
         nib.up()
         nib.speed('fastest')
-        nib.goto(0, -100)
+        nib.goto(0, -100)  # __:skip
         nib.shape('turtle')  # __:skip
         nib.color('white')
         nib.shape('triangle')  # __:skip
+# __pragma__ ('ecom')
+        '''?
+        nib.goto(0, 100)
+        nib.write = lambda txt: turtle_write(nib, txt)
+        ?'''
+# __pragma__ ('noecom')
+
         return nib
 
     nib_names = ['trunk', 'root', 'tree1', 'tree2', 'snow']
@@ -67,6 +107,12 @@ def create_turtles():
 def nft_draw(nft, screen=None):
     turtle.delay(0)  # __:skip
     turtle.tracer(0)  # __:skip
+
+# __pragma__ ('ecom')
+    #?turtle.reset_text()
+# __pragma__ ('ecom')
+    turtle.reset()
+    turtle.bgcolor("black")
 
     nibs = create_turtles()
 
@@ -87,8 +133,7 @@ def nft_draw(nft, screen=None):
 
     if LEAVES_NEEDED == 0:
         nibs['trunk'].goto(0, 0)
-        nibs['trunk'].write("No ERC721 NFTs found. Try another wallet.", align='center')  # __:skip
-        # __pragma__('js', '{}', 'window.alert("No ERC721 NFTs found. Try another wallet.")')
+        nibs['trunk'].write("No ERC721 NFTs found. Try another wallet.", align='center')
 
     elif LEAVES_NEEDED < 8:
         tb.multi_turtle_tree(palette, LEAVES, angle_step=15)
@@ -266,7 +311,7 @@ if __name__ == '__main__':
     from turtle import Screen
     scr = Screen()
     scr.setup(width=900, height=900)
-    scr.bgcolor('black')
+    # scr.bgcolor('black')
 
     nft_draw(nftdata, scr)
     # __pragma__ ('noskip')
