@@ -1,10 +1,14 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 import os
 
 from nft_data import NFTData, ETHERSCAN_KEY
 
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="src/static"))
+app.mount("/__target__", StaticFiles(directory="src/__target__"))
 
 
 try:
@@ -14,8 +18,9 @@ except Exception as ex:
 
 
 @app.get("/")
-async def get_data():
-    return {"OK"}
+async def index():
+    print("DEFAULT ROUTE")
+    return FileResponse('./src/static/index.html', media_type='text/html')
 
 
 @app.get("/api/getdata/")

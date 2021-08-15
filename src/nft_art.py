@@ -1,9 +1,21 @@
-from turtle import Screen, Turtle
+from turtle import Turtle
 import random
 import turtle
 from nft_data import NFTData
 import math
 import tree_builders as tb
+
+
+# Transcrypt random does not have randrange so we will monkeypatch a version of it
+# __pragma__ ('ecom')
+'''?
+def randrange(start, end, step):
+    rand = random.randint(start, end-1)
+    return rand - rand%step + start
+
+random.randrange = randrange
+?'''
+# __pragma__ ('noecom')
 
 
 # Fall colour palettes------------------------------------------------------------------- #
@@ -23,6 +35,8 @@ GOLD_PALETTE = ['#BD574E', '#F67E7D', '#FFAD87', '#843B62']  # root
 
 LEAF_PALETTES = [AUTUMN_COLOURS1, AUTUMN_COLOURS2, AUTUMN_COLOURS6, SPRING_COLOURS, PURPLE_PALETTE]
 ROOT_PALETTES = [AUTUMN_COLOURS3, AUTUMN_COLOURS4, AUTUMN_COLOURS5, AUTUMN_COLOURS7, GOLD_PALETTE]
+
+
 # ----------------------------------------------------------------------------------------
 
 
@@ -30,13 +44,13 @@ ROOT_PALETTES = [AUTUMN_COLOURS3, AUTUMN_COLOURS4, AUTUMN_COLOURS5, AUTUMN_COLOU
 def create_turtles():
     def make_nib():
         nib = Turtle()
-        nib.hideturtle()
-        nib.penup()
+        nib.hideturtle()  # __:skip
+        nib.up()
         nib.speed('fastest')
         nib.goto(0, -100)
-        nib.shape('turtle')
-        nib.pencolor('white')
-        nib.shape('triangle')
+        nib.shape('turtle')  # __:skip
+        nib.color('white')
+        nib.shape('triangle')  # __:skip
         return nib
 
     nib_names = ['trunk', 'root', 'tree1', 'tree2', 'snow']
@@ -50,20 +64,14 @@ def create_turtles():
     return all_nibs
 
 
-def main():
-    screen = Screen()
-    screen.setup(width=900, height=900)
-    screen.bgcolor('black')
-    turtle.delay(0)
-    turtle.tracer(0)
+def nft_draw(nft, screen=None):
+    turtle.delay(0)  # __:skip
+    turtle.tracer(0)  # __:skip
 
     nibs = create_turtles()
 
     palette = random.choice(LEAF_PALETTES)
     root_palette = random.choice(ROOT_PALETTES)
-
-    nft = NFTData()
-    nft.get_data()
 
     # ---GLOBALS------
     LEAVES = [(nft.token_id_list[i][0:6]) for i in range(len(nft.token_id_list))]  # ['leaf' for i in range(19)]
@@ -79,7 +87,8 @@ def main():
 
     if LEAVES_NEEDED == 0:
         nibs['trunk'].goto(0, 0)
-        nibs['trunk'].write("No ERC721 NFTs found. Try another wallet.", align='center')
+        nibs['trunk'].write("No ERC721 NFTs found. Try another wallet.", align='center')  # __:skip
+        # __pragma__('js', '{}', 'window.alert("No ERC721 NFTs found. Try another wallet.")')
 
     elif LEAVES_NEEDED < 8:
         tb.multi_turtle_tree(palette, LEAVES, angle_step=15)
@@ -221,7 +230,7 @@ def main():
         functions_ = [
             (tb.sym_tree, (nibs['tree1'], LEAVES, 120, level_tree, random.randrange(15, 45, 10), palette, 10, 0.8)),
             (tb.asymmetric_tree_under600, (
-            nibs['tree1'], LEAVES, random.randrange(110, 130, 10), random.randint(9, 10), random.choice(angle_range), palette, 10))
+                nibs['tree1'], LEAVES, random.randrange(110, 130, 10), random.randint(9, 10), random.choice(angle_range), palette, 10))
         ]
 
         x = random.choice(functions_)
@@ -237,16 +246,27 @@ def main():
 
         tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-280, address=nft.address[0:6])
 
-    screen.mainloop()
+    if screen:
+        screen.mainloop()
 
 
+# __pragma__ ('skip')
 if __name__ == '__main__':
-    # __pragma__ ('skip')
     import os
     from nft_data import ETHERSCAN_KEY
+
     try:
         os.environ['ETHERSCAN_KEY'] = ETHERSCAN_KEY
     except Exception as ex:
         print(ex)
+
+    nftdata = NFTData()
+    nftdata.get_data()
+
+    from turtle import Screen
+    scr = Screen()
+    scr.setup(width=900, height=900)
+    scr.bgcolor('black')
+
+    nft_draw(nftdata, scr)
     # __pragma__ ('noskip')
-    main()

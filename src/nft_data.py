@@ -89,11 +89,3 @@ if __name__ == '__main__':
     print("token_symbol_list:", nft.token_symbol_list)
     print("timestamp_list:", nft.timestamp_list)
 # __pragma__ ('noskip')
-
-
-# TODO: Will need REST API with route like: /api/getdata?address=0x148e2ED011A9EAAa200795F62889D68153EEacdE that returns json data
-'''
-    nft = NFTData(address)
-    nft.get_data()
-    return jsonify(address=nft.address, data=nft.data)
-'''
