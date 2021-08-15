@@ -1,4 +1,7 @@
 # __pragma__ ('skip')
+class window:
+    alert = None
+
 class console:
     log = None
     error = None
@@ -20,6 +23,7 @@ def redraw(address):
         try:
             nftdata = NFTData(data['address'], data['data'])
             nft_draw(nftdata)
+            document.getElementById("mintBtn").disabled = False
         except object as e:
             console.error(str(e))
 
@@ -31,7 +35,7 @@ def get_svg(address):
     def _get_svg(raw_data):
         data = dict(raw_data)
         try:
-            console.log(data.get('status', 'Request status not available'))
+            window.alert(data.get('status', 'Request status not available'))
         except object as e:
             console.error(str(e))
 
@@ -41,10 +45,11 @@ def get_svg(address):
         background.setAttribute('height', '100%')
         background.setAttribute('fill', 'black')
         svg_element = document.getElementById("__turtlegraph__").firstChild
-        svg_element.insertBefore(background, svg_element.firstChild)
-        svg = document.getElementById("__turtlegraph__").innerHTML
+        if svg_element.hasChildNodes():
+            svg_element.insertBefore(background, svg_element.firstChild)
+            svg = document.getElementById("__turtlegraph__").innerHTML
 
-        if svg:
-            fetch(f'/api/mint/', _get_svg, method='POST', data=dict(address=address, svg=svg))
-
-
+            if svg:
+                fetch(f'/api/mint/', _get_svg, method='POST', data=dict(address=address, svg=svg))
+        else:
+            window.alert("Please generate a NFT tree before minting!")
