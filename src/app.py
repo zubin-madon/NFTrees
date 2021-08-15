@@ -5,6 +5,7 @@ class console:
 
 class document:
     getElementById = None
+    createElement = None
 # __pragma__ ('noskip')
 
 from urlutils import fetch
@@ -30,11 +31,17 @@ def get_svg(address):
     def _get_svg(raw_data):
         data = dict(raw_data)
         try:
-            console.log(data)
+            console.log(data.get('status', 'Request status not available'))
         except object as e:
             console.error(str(e))
 
     if address:
+        background = document.createElement('rect')
+        background.setAttribute('width', '100%')
+        background.setAttribute('height', '100%')
+        background.setAttribute('fill', 'black')
+        svg_element = document.getElementById("__turtlegraph__").firstChild
+        svg_element.insertBefore(background, svg_element.firstChild)
         svg = document.getElementById("__turtlegraph__").innerHTML
 
         if svg:
