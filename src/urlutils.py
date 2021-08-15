@@ -12,9 +12,6 @@ class JSON:
 # __pragma__ ('noskip')
 
 
-# polyfill = require("@babel/polyfill")  # required by async/await
-
-
 # __pragma__ ('kwargs')
 async def fetch(url, callback=None, **kwargs):
     on_error = kwargs.pop('onError', None)

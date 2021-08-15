@@ -19,6 +19,7 @@ random.randrange = random_randrange
 ?'''
 # __pragma__ ('noecom')
 
+# __pragma__ ('kwargs')
 # Transcrypt turtle does not have write so we monkeypatch it
 # __pragma__ ('ecom')
 '''?
@@ -35,20 +36,23 @@ def turtle_reset_text():
     
 turtle.reset_text = turtle_reset_text
 
-def turtle_write(self, txt):
+
+def turtle_write(self, txt, font=('RootBeer', 14, 'bold'), align='center'):
     text = document.createElementNS(_ns, 'text')
     text.setAttribute ('x', self.pos()[0] + _offset[0])
     text.setAttribute ('y', self.pos()[1] + _offset[1])
     text.setAttribute ('fill', self._pencolor)
-    text.setAttribute ('font-family', 'RootBeer')
-    text.setAttribute ('font-size', '14')
-    text.setAttribute ('font-weight', 'bold')
-    text.setAttribute ('align', 'left')
+    # text.setAttribute ('font-family', f'{font[0]}, sans-serif')
+    # text.setAttribute ('font-size', f'{font[1]}px')
+    # text.setAttribute ('font-weight', font[2])
+    text.setAttribute ('align', align)
+    text.setAttribute ('style', f'font-size:{font[1]}px; font-weight:{font[2]}; font-family:{font[0]}, sans-serif;')
     text.innerHTML = txt
     _svg.appendChild(text)
     turtle._text.append (text)
 ?'''
 # __pragma__ ('noecom')
+# __pragma__ ('nokwargs')
 
 
 # Fall colour palettes------------------------------------------------------------------- #

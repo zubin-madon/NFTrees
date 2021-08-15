@@ -334,7 +334,7 @@ def write_labels(nib_name, x, y, address):
     try:
         style = ('RootBeer', 14, 'bold')
         nib_name.goto(x, y)
-        nib_name.write(address, align='left', font = style)
+        nib_name.write(address, align='left', font=style)
     except object as e:
         print(e)
 
