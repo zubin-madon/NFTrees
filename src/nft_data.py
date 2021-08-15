@@ -1,6 +1,7 @@
 # __pragma__ ('skip')
 import requests
 import os
+from web3 import Web3
 
 
 # -------Key, Etherscan API URLs------------------------
