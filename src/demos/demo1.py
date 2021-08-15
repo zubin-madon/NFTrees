@@ -1,4 +1,5 @@
-from turtle import *
+from turtle import Turtle
+
 
 josh = Turtle()
 
@@ -16,16 +17,35 @@ def draw(length):
         josh.forward(length)
 
 
-length = 150
-josh.up()
-josh.forward(length / 2)
-josh.left(90)
-josh.forward(length / 4)
-josh.right(90)
-josh.down()
+def main(screen=None):
+    josh.speed('fastest')
+    length = 150
+    josh.up()
+    josh.forward(length / 2)
+    josh.left(90)
+    josh.forward(length / 4)
+    josh.right(90)
+    josh.down()
 
-for i in range(3):
-    josh.right(120)
-    draw(length)
+    for i in range(3):
+        josh.right(120)
+        draw(length)
 
-josh.done()
+    if screen:
+        screen.mainloop()
+    else:
+        josh.done()
+
+
+if __name__ == '__main__':
+    scr = None
+    # __pragma__ ('skip')
+
+    from turtle import Screen
+    scr = Screen()
+    scr.setup(width=900, height=900)
+    scr.bgcolor('white')
+    # __pragma__ ('noskip')
+
+    main(scr)
+
