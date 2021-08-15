@@ -175,7 +175,8 @@ def nft_draw(nft, screen=None):
                                    levels=random.randint(4, 6),
                                    angle=random.randrange(-55, 55, 35),
                                    palette=palette,
-                                   pensize=10)
+                                   pensize=10,
+                                   start=True)
 
         tb.asym_roots(nib_name=nibs['root'],
                       ROOTS=ROOTS,
@@ -191,7 +192,7 @@ def nft_draw(nft, screen=None):
         functions_ = [
             (tb.sym_tree, (nibs['tree1'], LEAVES, 100, level_tree, random.randrange(10, 40, 10), palette, 10, 0.75)),
             (tb.asymmetric_tree_under47,
-             (nibs['tree1'], LEAVES, random.randrange(140, 200, 20), 5, random.randrange(-55, 55, 35), palette, 10))
+             (nibs['tree1'], LEAVES, random.randrange(140, 200, 20), 5, random.randrange(-55, 55, 35), palette, 10, True))
         ]
 
         x = random.choice(functions_)

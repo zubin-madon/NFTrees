@@ -33,6 +33,11 @@ def turtle_write(self, txt):
 # __pragma__ ('noecom')
 
 
+LEAF_STYLE = ('RootBeer', 10, 'bold')
+ROOT_STYLE = ('RootBeer', 10, 'bold')
+LABEL_STYLE = ('RootBeer', 14, 'bold')
+
+
 # --- Tree Functions--------
 # __pragma__ ('kwargs')
 def multi_turtle_tree(palette, LEAVES, angle_step):
@@ -107,71 +112,71 @@ def multi_turtle_tree(palette, LEAVES, angle_step):
 def sym_tree(nib_name, LEAVES, length, levels, angle, palette, pen_size, len_reduce):
     if len(LEAVES) == 0:
         nib_name.up()
-    else:
-        nib_name.down()
-        if levels > 0:
-            nib_name.pensize(pen_size)
-            nib_name.forward(length)
-            nib_name.right(angle)
-            sym_tree(nib_name, LEAVES, length * len_reduce, levels - 1, angle, palette, pen_size * 0.6, len_reduce)
-            nib_name.left(angle * 2)
-            sym_tree(nib_name, LEAVES, length * len_reduce, levels - 1, angle, palette, pen_size * 0.6, len_reduce)
-            nib_name.right(angle)
+        return
 
-            leaf = random.choice(LEAVES)
-            style = ('RootBeer', 10, 'bold')
-            nib_name.color(random.choice(palette))
-            nib_name.write(leaf, font=style)
-            nib_name.color('white')
-            LEAVES.remove(leaf)
+    nib_name.down()
+    if levels > 0:
+        nib_name.pensize(pen_size)
+        nib_name.forward(length)
+        nib_name.right(angle)
+        sym_tree(nib_name, LEAVES, length * len_reduce, levels - 1, angle, palette, pen_size * 0.6, len_reduce)
+        nib_name.left(angle * 2)
+        sym_tree(nib_name, LEAVES, length * len_reduce, levels - 1, angle, palette, pen_size * 0.6, len_reduce)
+        nib_name.right(angle)
 
-            nib_name.back(length)
+        leaf = random.choice(LEAVES)
+        nib_name.color(random.choice(palette))
+        nib_name.write(leaf, font=LEAF_STYLE)
+        nib_name.color('white')
+        LEAVES.remove(leaf)
+
+        nib_name.back(length)
 
 
 # -------------ASYMMETRIC TREE FUNCTION--------------------
-def asymmetric_tree_under14(nib_name, LEAVES, length, levels, angle, palette, pensize):
-    if len(LEAVES) > 0:
-        nib_name.down()
-        if levels > 0:
-            nib_name.down()
-            random.seed(46)
-            if random.random() > 0.33:
-                nib_name.pensize(pensize)
-                nib_name.color('white')
-                nib_name.forward(length)
-                nib_name.right(angle)
-                asymmetric_tree_under14(nib_name, LEAVES, length * 0.618, levels - 1, angle, palette, pensize * 0.5)
-                nib_name.right(angle)
-                nib_name.left(3 * angle)
-                asymmetric_tree_under14(nib_name, LEAVES, length * 0.618, levels - 1, angle, palette, pensize * 0.5)
-                nib_name.left(angle)
-                nib_name.right(2 * angle)
-                random.seed(int(time.time() * 1000))
-                if len(LEAVES) == 0:
-                    nib_name.up()
-                else:
-                    leaf = random.choice(LEAVES)
-                    style = ('RootBeer', 10, 'bold')
-                    nib_name.color(random.choice(palette))
-                    nib_name.write(leaf, font=style)
-                    LEAVES.remove(leaf)
-                    nib_name.color('white')
-
-                    random.seed(46)
-                    nib_name.color('white')
-                    nib_name.back(length)
-
-
-# -------------------------------------------------------------------------------------------------------------------
-def asymmetric_tree_under47(nib_name, LEAVES, length, levels, angle, palette, pensize):
+def asymmetric_tree_under14(nib_name, LEAVES, length, levels, angle, palette, pensize, start=False):
     if len(LEAVES) == 0:
         return
 
     nib_name.down()
     if levels > 0:
         nib_name.down()
-        random.seed(46)
-        if random.random() > 0.33:
+
+        # TODO: Factor in starting levels or # of leaves to insure there is *something* generated in the 1st few rounds
+        if start or random.random() > 0.2:
+            nib_name.pensize(pensize)
+            nib_name.color('white')
+            nib_name.forward(length)
+            nib_name.right(angle)
+            asymmetric_tree_under14(nib_name, LEAVES, length * 0.618, levels - 1, angle, palette, pensize * 0.5)
+            nib_name.right(angle)
+            nib_name.left(3 * angle)
+            asymmetric_tree_under14(nib_name, LEAVES, length * 0.618, levels - 1, angle, palette, pensize * 0.5)
+            nib_name.left(angle)
+            nib_name.right(2 * angle)
+
+            if len(LEAVES) == 0:
+                nib_name.up()
+                return
+
+            leaf = random.choice(LEAVES)
+            nib_name.color(random.choice(palette))
+            nib_name.write(leaf, font=LEAF_STYLE)
+            LEAVES.remove(leaf)
+            nib_name.color('white')
+            nib_name.back(length)
+
+
+# -------------------------------------------------------------------------------------------------------------------
+def asymmetric_tree_under47(nib_name, LEAVES, length, levels, angle, palette, pensize, start=False):
+    if len(LEAVES) == 0:
+        return
+
+    nib_name.down()
+    if levels > 0:
+        nib_name.down()
+        # TODO: Factor in starting levels or # of leaves to insure there is *something* generated in the 1st few rounds
+        if start or random.random() > 0.2:
             nib_name.pensize(pensize)
             nib_name.color('white')
             nib_name.forward(length)
@@ -184,20 +189,16 @@ def asymmetric_tree_under47(nib_name, LEAVES, length, levels, angle, palette, pe
             nib_name.left(angle)
             nib_name.right(2 * angle)
 
-            random.seed(int(time.time() * 1000))
             if len(LEAVES) == 0:
                 nib_name.up()
-            else:
-                leaf = random.choice(LEAVES)
-                style = ('RootBeer', 10, 'bold')
-                nib_name.color(random.choice(palette))
-                nib_name.write(leaf, font=style)
-                LEAVES.remove(leaf)
-                nib_name.color('white')
+                return
 
-                random.seed(46)
-                nib_name.color('white')
-                nib_name.back(length)
+            leaf = random.choice(LEAVES)
+            nib_name.color(random.choice(palette))
+            nib_name.write(leaf, font=LEAF_STYLE)
+            LEAVES.remove(leaf)
+            nib_name.color('white')
+            nib_name.back(length)
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -208,8 +209,9 @@ def asymmetric_tree_under127(nib_name, LEAVES, length, levels, angle, palette, p
     nib_name.down()
     if levels > 0:
         nib_name.down()
-        random.seed(46)
-        if random.random() > 0.33:
+
+        # TODO: Factor in starting levels or # of leaves to insure there is *something* generated in the 1st few rounds
+        if random.random() > 0.2:  # Cut off % for asymmetry
             nib_name.pensize(pensize)
             nib_name.color('white')
             nib_name.forward(length)
@@ -221,18 +223,15 @@ def asymmetric_tree_under127(nib_name, LEAVES, length, levels, angle, palette, p
             asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.6)
             nib_name.left(angle)
             nib_name.right(2 * angle)
-            random.seed(int(time.time() * 1000))
+
             if len(LEAVES) == 0:
                 nib_name.up()
                 return
-            else:
-                leaf = random.choice(LEAVES)
-                style = ('RootBeer', 10, 'bold')
-                nib_name.color(random.choice(palette))
-                nib_name.write(leaf, font=style)
-                LEAVES.remove(leaf)
-                nib_name.color('white')
-            random.seed(46)
+
+            leaf = random.choice(LEAVES)
+            nib_name.color(random.choice(palette))
+            nib_name.write(leaf, font=LEAF_STYLE)
+            LEAVES.remove(leaf)
             nib_name.color('white')
             nib_name.back(length)
 
@@ -241,101 +240,88 @@ def asymmetric_tree_under127(nib_name, LEAVES, length, levels, angle, palette, p
 def asymmetric_tree_under600(nib_name, LEAVES, length, levels, angle, palette, pensize):
     if len(LEAVES) == 0:
         return
+
     nib_name.down()
     if levels == 0:
         return
-    if levels >= 1:
-        nib_name.down()
-        random.seed(46)
-        if random.random() > 0.33:
-            nib_name.pensize(pensize)
-            nib_name.color('white')
-            nib_name.forward(length)
-            nib_name.right(angle)
-            asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
-            nib_name.right(angle)
-            asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
-            nib_name.left(3 * angle)
-            asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
-            nib_name.left(angle)
-            asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
-            nib_name.right(2 * angle)
-            random.seed(int(time.time() * 1000))
-            if len(LEAVES) == 0:
-                nib_name.up()
-                return
-            else:
-                leaf = random.choice(LEAVES)
-                style = ('RootBeer', 10, 'bold')
-                nib_name.color(random.choice(palette))
-                nib_name.write(leaf, font=style)
-                LEAVES.remove(leaf)
-                nib_name.color('white')
-            random.seed(46)
-            nib_name.color('white')
-            nib_name.back(length)
+
+    nib_name.down()
+
+    nib_name.pensize(pensize)
+    nib_name.color('white')
+    nib_name.forward(length)
+    nib_name.right(angle)
+    asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
+    nib_name.right(angle)
+    asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
+    nib_name.left(3 * angle)
+    asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
+    nib_name.left(angle)
+    asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
+    nib_name.right(2 * angle)
+
+    if len(LEAVES) == 0:
+        nib_name.up()
+        return
+
+    leaf = random.choice(LEAVES)
+    nib_name.color(random.choice(palette))
+    nib_name.write(leaf, font=LEAF_STYLE)
+    LEAVES.remove(leaf)
+    nib_name.color('white')
+    nib_name.back(length)
 
 
 def asym_roots(nib_name, ROOTS, length, levels, angle, root_palette, pensize):
+    print('aroot', nib_name, len(ROOTS), length, levels, angle, root_palette, pensize)
+    
+    def change_color(nib):
+        nib.color(random.choice(root_palette))
+        
     try:
-        def get_color(root_color):
-            return random.choice(root_color)
-
-        nib_name.color(get_color(root_palette))
         if len(ROOTS) == 0:
             nib_name.up()
             return
+
+        nib_name.down()
+        if levels == 0:
+            root = random.choice(ROOTS)
+            change_color(nib_name)
+            nib_name.write(root, font=ROOT_STYLE, align="right")
+            ROOTS.remove(root)
         else:
+            change_color(nib_name)
             nib_name.down()
-            nib_name.color(get_color(root_palette))
-            nib_name.color(get_color(root_palette))
-            if levels == 0:
-                random.seed(int(time.time() * 1000))
-                if len(ROOTS) == 0:
-                    return
-                else:
-                    root = random.choice(ROOTS)
-                    style = ('RootBeer', 10, 'bold')
-                    nib_name.color(random.choice(root_palette))
-                    nib_name.write(root, font=style, align="right")
-                    ROOTS.remove(root)
 
-            random.seed(46)
-            nib_name.color(get_color(root_palette))
-            nib_name.color(get_color(root_palette))
+            nib_name.pensize(pensize)
+            nib_name.right(angle)
+            change_color(nib_name)
+            asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
+            nib_name.right(angle)
+            asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
+            nib_name.left(3 * angle)
+            asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
+            nib_name.left(angle)
+            change_color(nib_name)
+            asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
+            change_color(nib_name)
+            nib_name.right(2 * angle)
 
-            if levels > 0:
-                nib_name.down()
-                random.seed(46)
-                if random.random() > 0.33:
-                    nib_name.pensize(pensize)
-                    nib_name.right(angle)
-                    nib_name.color(get_color(root_palette))
-                    asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
-                    nib_name.right(angle)
-                    asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
-                    nib_name.left(3 * angle)
-                    asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
-                    nib_name.left(angle)
-                    nib_name.color(get_color(root_palette))
-                    asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
-                    nib_name.color(get_color(root_palette))
-                    nib_name.right(2 * angle)
+            if len(ROOTS) == 0:
+                nib_name.up()
+            else:
+                print("ROOTS LEFT:", len(ROOTS))
+                change_color(nib_name)
+                nib_name.back(length)
 
-                    if len(ROOTS) == 0:
-                        nib_name.up()
-                    else:
-                        nib_name.color(get_color(root_palette))
-                        nib_name.back(length)
     except object as e:
         print(e)
 
 
 def write_labels(nib_name, x, y, address):
     try:
-        style = ('RootBeer', 14, 'bold')
         nib_name.goto(x, y)
-        nib_name.write(address, align='left', font=style)
+        nib_name.write(address, align='left', font=LABEL_STYLE)
     except object as e:
         print(e)
 
