@@ -6,16 +6,24 @@ import os
 # -------Key, Etherscan API URLs------------------------
 test_data = dict(
     vip_address2='0x57076ca7a26c16bf301b6d1a7bef96e265d30c3e',
-    vip_address3='0x2eb5e5713a874786af6da95f6e4deacedb5dc246',  # -- vip address cobie
-    vip_address='0x650dCdEB6ecF05aE3CAF30A70966E2F395d5E9E5',
-    vip4='0x148e2ED011A9EAAa200795F62889D68153EEacdE',
-    coin_artist='0x8443379cbaf7a68b2cc1626df9e4cb47d525a0e4',
-    NSF_address='0x32cc2ec897f21a77a704e9a7313af6a640c47bb5',
-    ultra_rare='0x96fdfd3bc8cd692aceb37a04d2be5e0bcff2172d',  # only 1159
+    vip_address3='0x2eb5e5713a874786af6da95f6e4deacedb5dc246',  # -- vip address cobie for testing
+    vip_address='0x650dCdEB6ecF05aE3CAF30A70966E2F395d5E9E5', #---for testing
+    vip4='0x148e2ED011A9EAAa200795F62889D68153EEacdE', #---for testing
+    coin_artist='0x8443379cbaf7a68b2cc1626df9e4cb47d525a0e4', #---for testing
+    NSF_address='0x32cc2ec897f21a77a704e9a7313af6a640c47bb5', #---for testing
+    ultra_rare='0x96fdfd3bc8cd692aceb37a04d2be5e0bcff2172d',  # this address has only erc1155 tokens which don't show up.
 )
 
 ETHERSCAN_URL = f'https://api.etherscan.io'
 ETHERSCAN_KEY = 'C431S5DRCQ7XWIXT2144ZFT9IYBJKKG1VK'
+
+'''15 aug- 2021 Zubin added Infura URL to get 'Current Block Number'. On each artwork (tree) below the 5 chars of address, we will also print current block number which serves as a timestamp.
+So if the user's wallet gets additional tokens in future and user generates a new tree, they can see the change in wallet tree patterns over time.'''
+
+project_id = '4a337ee2c0fa4f44821a55d4bb824708'
+infura_url = f"https://mainnet.infura.io/v3/{project_id}"
+w3 = Web3(Web3.HTTPProvider(infura_url))
+CURRENT_BLOCK = w3.eth.block_number
 
 DEFAULT_ADDRESS = test_data['vip4']
 # __pragma__ ('noskip')
