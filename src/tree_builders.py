@@ -211,7 +211,7 @@ def asymmetric_tree_under127(nib_name, LEAVES, length, levels, angle, palette, p
         nib_name.down()
 
         # TODO: Factor in starting levels or # of leaves to insure there is *something* generated in the 1st few rounds
-        if random.random() > 0.2:  # Cut off % for asymmetry
+        if random.random() > 0.3:  # Cut off % for asymmetry
             nib_name.pensize(pensize)
             nib_name.color('white')
             nib_name.forward(length)
@@ -273,8 +273,6 @@ def asymmetric_tree_under600(nib_name, LEAVES, length, levels, angle, palette, p
 
 
 def asym_roots(nib_name, ROOTS, length, levels, angle, root_palette, pensize):
-    print('aroot', nib_name, len(ROOTS), length, levels, angle, root_palette, pensize)
-    
     def change_color(nib):
         nib.color(random.choice(root_palette))
         
@@ -310,7 +308,7 @@ def asym_roots(nib_name, ROOTS, length, levels, angle, root_palette, pensize):
             if len(ROOTS) == 0:
                 nib_name.up()
             else:
-                print("ROOTS LEFT:", len(ROOTS))
+                # print("ROOTS LEFT:", len(ROOTS))
                 change_color(nib_name)
                 nib_name.back(length)
 
