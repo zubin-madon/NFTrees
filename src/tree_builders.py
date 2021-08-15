@@ -135,7 +135,7 @@ def asymmetric_tree_under14(nib_name, LEAVES, length, levels, angle, palette, pe
         if levels > 0:
             nib_name.down()
             random.seed(46)
-            if random.random() > 0.5:
+            if random.random() > 0.33:
                 nib_name.pensize(pensize)
                 nib_name.color('white')
                 nib_name.forward(length)
@@ -171,7 +171,7 @@ def asymmetric_tree_under47(nib_name, LEAVES, length, levels, angle, palette, pe
     if levels > 0:
         nib_name.down()
         random.seed(46)
-        if random.random() > 0.5:
+        if random.random() > 0.33:
             nib_name.pensize(pensize)
             nib_name.color('white')
             nib_name.forward(length)
@@ -209,7 +209,7 @@ def asymmetric_tree_under127(nib_name, LEAVES, length, levels, angle, palette, p
     if levels > 0:
         nib_name.down()
         random.seed(46)
-        if random.random() > 0.5:
+        if random.random() > 0.33:
             nib_name.pensize(pensize)
             nib_name.color('white')
             nib_name.forward(length)
@@ -247,7 +247,7 @@ def asymmetric_tree_under600(nib_name, LEAVES, length, levels, angle, palette, p
     if levels >= 1:
         nib_name.down()
         random.seed(46)
-        if random.random() > 0.5:
+        if random.random() > 0.33:
             nib_name.pensize(pensize)
             nib_name.color('white')
             nib_name.forward(length)
@@ -306,7 +306,7 @@ def asym_roots(nib_name, ROOTS, length, levels, angle, root_palette, pensize):
             if levels > 0:
                 nib_name.down()
                 random.seed(46)
-                if random.random() > 0.5:
+                if random.random() > 0.33:
                     nib_name.pensize(pensize)
                     nib_name.right(angle)
                     nib_name.color(get_color(root_palette))
