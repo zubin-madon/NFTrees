@@ -117,7 +117,9 @@ def nft_draw(nft, tree_seed=None):
     if tree_seed:
         random.seed(tree_seed)
     else:
-        random.seed(int(time.time() * 1000))
+        new_seed = int(time.time() * 1000)
+        print("seed:", new_seed)
+        random.seed(new_seed)
 
 # __pragma__ ('ecom')
     #?turtle.reset_text()
@@ -334,7 +336,7 @@ if __name__ == '__main__':
     else:
         nftdata = NFTData()
         nftdata.get_data()
-        # nft_draw(nftdata, 123)
+        # nft_draw(nftdata, 1629084036295)
         nft_draw(nftdata)
         screen.mainloop()
 # __pragma__ ('noskip')
