@@ -211,7 +211,7 @@ def asymmetric_tree_under127(nib_name, LEAVES, length, levels, angle, palette, p
         nib_name.down()
 
         # TODO: Factor in starting levels or # of leaves to insure there is *something* generated in the 1st few rounds
-        if random.random() > 0.3:  # Cut off % for asymmetry
+        if random.random() > 0.4:  # Cut off % for asymmetry
             nib_name.pensize(pensize)
             nib_name.color('white')
             nib_name.forward(length)
@@ -318,8 +318,11 @@ def asym_roots(nib_name, ROOTS, length, levels, angle, root_palette, pensize):
 
 def write_labels(nib_name, x, y, address):
     try:
+# __pragma__ ('ecom')
+        #?y = -y
+# __pragma__ ('ecom')
         nib_name.goto(x, y)
-        nib_name.write(address, align='left', font=LABEL_STYLE)
+        nib_name.write(address, font=LABEL_STYLE, align='left')
     except object as e:
         print(e)
 
