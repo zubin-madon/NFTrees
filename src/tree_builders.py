@@ -202,7 +202,7 @@ def asymmetric_tree_under47(nib_name, LEAVES, length, levels, angle, palette, pe
 
 
 # ----------------------------------------------------------------------------------------------------------------
-def asymmetric_tree_under127(nib_name, LEAVES, length, levels, angle, palette, pensize):
+def asymmetric_tree_under127(nib_name, LEAVES, length, levels, angle, palette, pensize, start=False):
     if len(LEAVES) == 0:
         return
 
@@ -211,7 +211,7 @@ def asymmetric_tree_under127(nib_name, LEAVES, length, levels, angle, palette, p
         nib_name.down()
 
         # TODO: Factor in starting levels or # of leaves to insure there is *something* generated in the 1st few rounds
-        if random.random() > 0.4:  # Cut off % for asymmetry
+        if start or random.random() > 0.35:  # Cut off % for asymmetry
             nib_name.pensize(pensize)
             nib_name.color('white')
             nib_name.forward(length)
@@ -251,11 +251,11 @@ def asymmetric_tree_under600(nib_name, LEAVES, length, levels, angle, palette, p
     nib_name.color('white')
     nib_name.forward(length)
     nib_name.right(angle)
-    asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
+    asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8, True)
     nib_name.right(angle)
     asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
     nib_name.left(3 * angle)
-    asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
+    asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8, True)
     nib_name.left(angle)
     asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
     nib_name.right(2 * angle)
@@ -296,12 +296,12 @@ def asym_roots(nib_name, ROOTS, length, levels, angle, root_palette, pensize):
             change_color(nib_name)
             asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
             nib_name.right(angle)
-            asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
+            asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4, True)
             nib_name.left(3 * angle)
             asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
             nib_name.left(angle)
             change_color(nib_name)
-            asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
+            asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4, True)
             change_color(nib_name)
             nib_name.right(2 * angle)
 

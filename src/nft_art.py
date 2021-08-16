@@ -1,3 +1,4 @@
+import time
 from turtle import Turtle
 import random
 import turtle
@@ -89,7 +90,7 @@ def create_turtles():
         nib.shape('triangle')  # __:skip
 # __pragma__ ('ecom')
         '''?
-        nib.goto(0, 100)
+        nib.goto(0, 120)
         def write(txt, kwargs):
             turtle_write(nib, txt, kwargs)
         
@@ -99,18 +100,17 @@ def create_turtles():
 
         return nib
 
-    nib_names = ['trunk', 'root', 'tree1', 'tree2', 'snow']
+    nib_names = ['trunk', 'root', 'tree']
     all_nibs = {nib: make_nib() for nib in nib_names}
 
-    all_nibs['tree1'].left(90)
-    all_nibs['tree2'].right(90)
+    all_nibs['tree'].left(90)
     all_nibs['root'].right(90)
     all_nibs['trunk'].right(90)
 
     return all_nibs
 
 
-def nft_draw(nft, screen=None):
+def nft_draw(nft):
     turtle.delay(0)  # __:skip
     turtle.tracer(0)  # __:skip
 
@@ -154,7 +154,7 @@ def nft_draw(nft, screen=None):
 
     elif LEAVES_NEEDED < 15:
         angle_range = [random.randrange(-60, -30, 10), random.randrange(30, 60, 10)]
-        tb.asymmetric_tree_under14(nib_name=nibs['tree1'],
+        tb.asymmetric_tree_under14(nib_name=nibs['tree'],
                                    LEAVES=LEAVES,
                                    length=random.randrange(100, 140, 20),
                                    levels=random.randint(4, 5),
@@ -171,7 +171,7 @@ def nft_draw(nft, screen=None):
         tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-260, address=nft.address[0:6])
 
     elif LEAVES_NEEDED < 31:
-        tb.asymmetric_tree_under47(nib_name=nibs['tree1'],
+        tb.asymmetric_tree_under47(nib_name=nibs['tree'],
                                    LEAVES=LEAVES,
                                    length=random.randrange(140, 200, 20),
                                    levels=random.randint(4, 6),
@@ -192,9 +192,9 @@ def nft_draw(nft, screen=None):
 
     elif LEAVES_NEEDED < 48:
         functions_ = [
-            (tb.sym_tree, (nibs['tree1'], LEAVES, 100, level_tree, random.randrange(10, 40, 10), palette, 10, 0.75)),
+            (tb.sym_tree, (nibs['tree'], LEAVES, 100, level_tree, random.randrange(10, 40, 10), palette, 10, 0.75)),
             (tb.asymmetric_tree_under47,
-             (nibs['tree1'], LEAVES, random.randrange(140, 200, 20), 5, random.randrange(-55, 55, 35), palette, 10, True))
+             (nibs['tree'], LEAVES, random.randrange(140, 200, 20), 5, random.randrange(-55, 55, 35), palette, 10, True))
         ]
 
         x = random.choice(functions_)
@@ -214,9 +214,9 @@ def nft_draw(nft, screen=None):
         angle_range = [random.randrange(-40, -10, 5), random.randrange(10, 40, 5)]
 
         functions_ = [
-            (tb.sym_tree, (nibs['tree1'], LEAVES, 130, level_tree, random.randrange(15, 45, 10), palette, 10, 0.75)),
+            (tb.sym_tree, (nibs['tree'], LEAVES, 130, level_tree, random.randrange(15, 45, 10), palette, 10, 0.75)),
             (tb.asymmetric_tree_under127,
-             (nibs['tree1'], LEAVES, random.randrange(120, 160, 20), 6, random.choice(angle_range), palette, 10))
+             (nibs['tree'], LEAVES, random.randrange(120, 160, 20), 6, random.choice(angle_range), palette, 10, True))
         ]
 
         x = random.choice(functions_)
@@ -235,9 +235,9 @@ def nft_draw(nft, screen=None):
     elif LEAVES_NEEDED < 301:
         angle_range = [random.randrange(-45, -15, 10), random.randrange(15, 45, 10)]
         functions_ = [
-            (tb.sym_tree, (nibs['tree1'], LEAVES, 130, level_tree, random.randrange(20, 45, 5), palette, 10, 0.75)),
+            (tb.sym_tree, (nibs['tree'], LEAVES, 130, level_tree, random.randrange(20, 45, 5), palette, 10, 0.75)),
             (tb.asymmetric_tree_under600,
-             (nibs['tree1'], LEAVES, random.randrange(120, 140, 20), random.randint(6, 8), random.choice(angle_range), palette, 10))
+             (nibs['tree'], LEAVES, random.randrange(120, 140, 20), random.randint(6, 8), random.choice(angle_range), palette, 10))
         ]
 
         x = random.choice(functions_)
@@ -256,9 +256,9 @@ def nft_draw(nft, screen=None):
     elif LEAVES_NEEDED < 701:
         angle_range = [random.randrange(-45, -15, 10), random.randrange(15, 45, 10)]
         functions_ = [
-            (tb.sym_tree, (nibs['tree1'], LEAVES, 120, level_tree, random.randrange(15, 55, 10), palette, 10, 0.75)),
+            (tb.sym_tree, (nibs['tree'], LEAVES, 120, level_tree, random.randrange(15, 55, 10), palette, 10, 0.75)),
             (tb.asymmetric_tree_under600,
-             (nibs['tree1'], LEAVES, random.randrange(130, 140, 10), random.randint(8, 9), random.choice(angle_range), palette, 10))
+             (nibs['tree'], LEAVES, random.randrange(130, 140, 10), random.randint(8, 9), random.choice(angle_range), palette, 10))
         ]
 
         x = random.choice(functions_)
@@ -280,9 +280,9 @@ def nft_draw(nft, screen=None):
 
         random.random()
         functions_ = [
-            (tb.sym_tree, (nibs['tree1'], LEAVES, 120, level_tree, random.randrange(15, 45, 10), palette, 10, 0.8)),
+            (tb.sym_tree, (nibs['tree'], LEAVES, 120, level_tree, random.randrange(15, 45, 10), palette, 10, 0.8)),
             (tb.asymmetric_tree_under600, (
-                nibs['tree1'], LEAVES, random.randrange(110, 130, 10), random.randint(9, 10), random.choice(angle_range), palette, 10))
+                nibs['tree'], LEAVES, random.randrange(110, 130, 10), random.randint(9, 10), random.choice(angle_range), palette, 10))
         ]
 
         x = random.choice(functions_)
@@ -298,9 +298,6 @@ def nft_draw(nft, screen=None):
 
         tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-280, address=nft.address[0:6])
 
-    if screen:
-        screen.mainloop()
-
 
 # __pragma__ ('skip')
 if __name__ == '__main__':
@@ -312,13 +309,26 @@ if __name__ == '__main__':
     except Exception as ex:
         print(ex)
 
-    nftdata = NFTData()
-    nftdata.get_data()
-
     from turtle import Screen
-    scr = Screen()
-    scr.setup(width=900, height=900)
-    # scr.bgcolor('black')
 
-    nft_draw(nftdata, scr)
-    # __pragma__ ('noskip')
+    screen = Screen()
+    screen.setup(width=900, height=900)
+    # screen.bgcolor('black')
+
+    TEST_ALL = True
+    if TEST_ALL:
+        from nft_data import test_data
+
+        for wallet_id in test_data.values():
+            screen.reset()
+            nftdata = NFTData(wallet_id)
+            nftdata.get_data()
+            nft_draw(nftdata)
+            screen.update()
+            time.sleep(10)
+    else:
+        nftdata = NFTData()
+        nftdata.get_data()
+        nft_draw(nftdata)
+        screen.mainloop()
+# __pragma__ ('noskip')
