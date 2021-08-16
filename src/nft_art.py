@@ -110,9 +110,12 @@ def create_turtles():
     return all_nibs
 
 
-def nft_draw(nft):
+def nft_draw(nft, tree_seed=None):
     turtle.delay(0)  # __:skip
     turtle.tracer(0)  # __:skip
+
+    if tree_seed:
+        random.seed(tree_seed)
 
 # __pragma__ ('ecom')
     #?turtle.reset_text()
@@ -315,7 +318,7 @@ if __name__ == '__main__':
     screen.setup(width=900, height=900)
     # screen.bgcolor('black')
 
-    TEST_ALL = True
+    TEST_ALL = False
     if TEST_ALL:
         from nft_data import test_data
 
@@ -329,6 +332,7 @@ if __name__ == '__main__':
     else:
         nftdata = NFTData()
         nftdata.get_data()
+        # nft_draw(nftdata, 123)
         nft_draw(nftdata)
         screen.mainloop()
 # __pragma__ ('noskip')

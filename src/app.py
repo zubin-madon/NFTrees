@@ -1,6 +1,11 @@
 # __pragma__ ('skip')
 class window:
     alert = None
+    location = None
+    URLSearchParams = None
+
+def __new__(obj):
+    return obj
 
 class console:
     log = None
@@ -22,7 +27,16 @@ def redraw(address):
         data = dict(raw_data)
         try:
             nftdata = NFTData(data['address'], data['data'])
-            nft_draw(nftdata)
+
+            querystring = window.location.search
+            param_entries = __new__(window.URLSearchParams(querystring)).entries()
+            params = {p[0]: p[1] for p in param_entries if p}
+            tree_seed = params.get('seed', None)
+            if tree_seed:
+                nft_draw(nftdata, int(tree_seed))
+            else:
+                nft_draw(nftdata)
+
             document.getElementById("mintBtn").disabled = False
         except object as e:
             console.error(str(e))
