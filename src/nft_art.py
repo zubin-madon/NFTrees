@@ -124,7 +124,7 @@ def nft_draw(nft, tree_seed=None):
 # __pragma__ ('ecom')
         '''?
         if document.getElementById("mintBtn").disabled:
-            print("seed:", new_seed)
+            print(f'?seed={new_seed}')
         ?'''
 
     #?turtle.reset_text()
