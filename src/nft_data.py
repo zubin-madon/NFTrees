@@ -25,6 +25,7 @@ project_id = '4a337ee2c0fa4f44821a55d4bb824708'
 infura_url = f"https://mainnet.infura.io/v3/{project_id}"
 w3 = Web3(Web3.HTTPProvider(infura_url))
 CURRENT_BLOCK = w3.eth.block_number
+print("CURRENT_BLOCK:", CURRENT_BLOCK)
 
 DEFAULT_ADDRESS = test_data['vip4']
 # __pragma__ ('noskip')
