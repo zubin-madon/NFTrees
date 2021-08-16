@@ -2,6 +2,7 @@
 Create Trees Using Python Turtle in Web
 
 ---
+Download font rootbeer.ttf in main
 
 ### Setup Virtual Environment
 _For Linux/Mac:_  
