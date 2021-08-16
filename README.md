@@ -55,4 +55,7 @@ _To generate minified JavaScript w/o sourcemaps, just leave off the flags when r
   https://github.com/QQuick/Transcrypt/blob/master/transcrypt/modules/turtle/__init__.py  
 
 - Starting point for demo2:  
-  https://github.com/bunkahle/Transcrypt-Examples/tree/master/turtle  
+  https://github.com/bunkahle/Transcrypt-Examples/tree/master/turtle
+  
+- NFT minting and wallet integration A-Z resource:
+  https://github.com/austintgriffith/scaffold-eth/tree/simple-nft-example
