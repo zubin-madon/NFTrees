@@ -18,10 +18,6 @@ except Exception as ex:
     print(ex)
 
 
-class MintData(BaseModel):
-    address: str
-    svg: str
-
 @app.get("/")
 async def index():
     print("DEFAULT ROUTE")
@@ -35,6 +31,11 @@ async def get_data(address=None):
         nft.get_data()
         return dict(address=nft.address, data=nft.data)
     return dict(address='', data='')
+
+
+class MintData(BaseModel):
+    address: str
+    svg: str
 
 
 @app.post("/api/mint/")

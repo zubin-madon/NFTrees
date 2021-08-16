@@ -118,10 +118,15 @@ def nft_draw(nft, tree_seed=None):
         random.seed(tree_seed)
     else:
         new_seed = int(time.time() * 1000)
-        print("seed:", new_seed)
         random.seed(new_seed)
+        print("seed:", new_seed)  # __:skip
 
 # __pragma__ ('ecom')
+        '''?
+        if document.getElementById("mintBtn").disabled:
+            print("seed:", new_seed)
+        ?'''
+
     #?turtle.reset_text()
 # __pragma__ ('ecom')
     turtle.reset()
