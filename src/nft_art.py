@@ -116,6 +116,8 @@ def nft_draw(nft, tree_seed=None):
 
     if tree_seed:
         random.seed(tree_seed)
+    else:
+        random.seed(int(time.time() * 1000))
 
 # __pragma__ ('ecom')
     #?turtle.reset_text()
