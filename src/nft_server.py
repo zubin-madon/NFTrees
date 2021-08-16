@@ -6,7 +6,7 @@ import os
 
 from nft_data import NFTData, ETHERSCAN_KEY
 
-
+'''Convert paths below to absolute paths while testing on local machine'''
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="src/static"))
 app.mount("/__target__", StaticFiles(directory="src/__target__"))
