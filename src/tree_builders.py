@@ -123,12 +123,16 @@ def sym_tree(nib_name, LEAVES, length, levels, angle, palette, pen_size, len_red
         nib_name.left(angle * 2)
         sym_tree(nib_name, LEAVES, length * len_reduce, levels - 1, angle, palette, pen_size * 0.6, len_reduce)
         nib_name.right(angle)
-
-        leaf = random.choice(LEAVES)
-        nib_name.color(random.choice(palette))
-        nib_name.write(leaf, font=LEAF_STYLE)
-        nib_name.color('white')
-        LEAVES.remove(leaf)
+        
+         if len(LEAVES) == 0:
+            nib_name.up()
+            return
+        else:
+            leaf = random.choice(LEAVES)
+            nib_name.color(random.choice(palette))
+            nib_name.write(leaf, font=LEAF_STYLE)
+            nib_name.color('white')
+            LEAVES.remove(leaf)
 
         nib_name.back(length)
 
