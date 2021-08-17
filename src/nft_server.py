@@ -43,6 +43,7 @@ async def get_data(svg_data: MintData):
     if svg_data:
         if svg_data.address and svg_data.svg:
             try:
+                # Instead of saving locally, code to upload SVG to IPFS would go here
                 with open(f'{svg_data.address}.svg', 'w') as f:
                     f.write(svg_data.svg)
             except Exception as e:
