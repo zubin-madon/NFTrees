@@ -40,13 +40,16 @@ _To generate minified JavaScript w/o sourcemaps, just leave off the flags when r
 
 
 ### Main App
-- _**nft_art.py**_ - entry point
-- _**tree_builders.py**_ - tree building algorithms
+- _**nft_art.py**_ - entry point (works on both server & client)
+- _**tree_builders.py**_ - tree building algorithms (works on both server & client)
 - _**nft_data.py**_ - Class to retrieve and parse NFT data
   - works on both server & client
   - use a seed value as second parameter to repeat tree build
   - add `?seed=123` to `/` URL to get repeatable tree builds in browser (use any # for seed value)
   - Change `TEST_ALL` variable to `True` to run all wallet IDs in `nft_data.test_data`
+- _**urlutils.py**_ - client side ajax helper functions (gets transpiled)  
+- _**app.py**_ - client side web application (transpiled files live in ./src/\_\_target\_\_)  
+  (venv) $ `transcrypt --nomin --map src/app.py`  
 - _**nft_server.py**_ - FastAPI REST server  
   (venv) $ `uvicorn  --app-dir src nft_server:app --reload`  
 ---
