@@ -48,10 +48,11 @@ _To generate minified JavaScript w/o sourcemaps, just leave off the flags when r
   - add `?seed=123` to `/` URL to get repeatable tree builds in browser (use any # for seed value)
   - Change `TEST_ALL` variable to `True` to run all wallet IDs in `nft_data.test_data`
 - _**urlutils.py**_ - client side ajax helper functions (gets transpiled)  
-- _**app.py**_ - client side web application (transpiled files live in ./src/\_\_target\_\_)  
+- _**app.py**_ - client side web application (transpiled files get put into `./src/__target__/`)  
   (venv) $ `transcrypt --nomin --map src/app.py`  
 - _**nft_server.py**_ - FastAPI REST server  
   (venv) $ `uvicorn  --app-dir src nft_server:app --reload`  
+  http://localhost:8000  
 ---
 
 ## Reference links:
