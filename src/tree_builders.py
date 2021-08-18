@@ -31,7 +31,7 @@ class TreeBuilder:
             tim.penup()
             tim.goto(0, -100)
             tim.left(90)
-            tim.pencolor("white")
+            tim.color("white")
             turtles_.append(tim)
         for i in range(len(turtles_)):
             turtles_[i].pendown()
@@ -45,7 +45,6 @@ class TreeBuilder:
             turtles_[i].forward(length2)
 
             if random.random() <= 0.618:
-                # random.seed()
                 turtles_[i].pensize(2)
                 if angle1 < 0:
                     angle2 = random.randrange(-42, -7, 14)
@@ -64,32 +63,32 @@ class TreeBuilder:
                         angle2 = random.randrange(15, 60, 15)
                         turtles_[i].left(angle2)
                     turtles_[i].forward(length2 * 0.618 * 0.618)
-                    turtles_[i].pencolor(random.choice(palette))
+                    turtles_[i].color(random.choice(palette))
                     leaf = random.choice(LEAVES)
                     turtles_[i].write(leaf)
                     LEAVES.remove(leaf)
-                    turtles_[i].pencolor('white')
+                    turtles_[i].color('white')
 
                 else:
                     if len(LEAVES) == 0:
                         pass
                     else:
-                        turtles_[i].pencolor(random.choice(palette))
+                        turtles_[i].color(random.choice(palette))
                         leaf = random.choice(LEAVES)
                         turtles_[i].write(leaf)
                         LEAVES.remove(leaf)
-                        turtles_[i].pencolor('white')
+                        turtles_[i].color('white')
 
             else:
                 if len(LEAVES) == 0:
                     pass
                 else:
-                    random.seed(50)
-                    turtles_[i].pencolor(random.choice(palette))
-                    leaf = random.choice(LEAVES)
+                    seq = self.get_seq()
+                    turtles_[i].color(self.choose(seq, palette))
+                    leaf = self.choose(seq, LEAVES)
                     turtles_[i].write(leaf)
                     LEAVES.remove(leaf)
-                    turtles_[i].pencolor('white')
+                    turtles_[i].color('white')
                     return
 
     # ----------Symmetrical Tree--------------------------------------
@@ -110,12 +109,13 @@ class TreeBuilder:
         nib_name.left(angle * 2)
         self.sym_tree(nib_name, length * len_reduce, levels - 1, angle, len_reduce, palette, LEAVES, pen_size * 0.6)
         nib_name.right(angle)
+        
         if len(LEAVES) != 0:
             leaf = random.choice(LEAVES)
             style = ('RootBeer', 10, 'bold')
-            nib_name.pencolor(random.choice(palette))
+            nib_name.color(random.choice(palette))
             nib_name.write(leaf, font=style)
-            nib_name.pencolor('white')
+            nib_name.color('white')
             LEAVES.remove(leaf)
 
         nib_name.backward(length)
@@ -148,13 +148,12 @@ class TreeBuilder:
                 if len(LEAVES) == 0:
                     nib_name.penup()
                     return
-                else:
-                    leaf = random.choice(LEAVES)
-                    style = ('RootBeer', 10, 'bold')
-                    nib_name.pencolor(random.choice(palette))
-                    nib_name.write(leaf, font=style)
-                    LEAVES.remove(leaf)
-                    nib_name.pencolor('white')
+           
+                leaf = random.choice(LEAVES)
+                style = ('RootBeer', 10, 'bold')
+                nib_name.color(random.choice(palette))
+                nib_name.write(leaf, font=style)
+                LEAVES.remove(leaf)
 
                 nib_name.color('white')
                 nib_name.backward(length)
@@ -186,13 +185,12 @@ class TreeBuilder:
                 if len(LEAVES) == 0:
                     nib_name.penup()
                     return
-                else:
-                    leaf = random.choice(LEAVES)
-                    style = ('RootBeer', 10, 'bold')
-                    nib_name.pencolor(random.choice(palette))
-                    nib_name.write(leaf, font=style)
-                    LEAVES.remove(leaf)
-                    nib_name.pencolor('white')
+      
+                leaf = random.choice(LEAVES)
+                style = ('RootBeer', 10, 'bold')
+                nib_name.color(random.choice(palette))
+                nib_name.write(leaf, font=style)
+                LEAVES.remove(leaf)
 
                 nib_name.color('white')
                 nib_name.backward(length)
@@ -226,13 +224,12 @@ class TreeBuilder:
                 if len(LEAVES) == 0:
                     nib_name.penup()
                     return
-                else:
-                    leaf = random.choice(LEAVES)
-                    style = ('RootBeer', 10, 'bold')
-                    nib_name.pencolor(random.choice(palette))
-                    nib_name.write(leaf, font=style)
-                    LEAVES.remove(leaf)
-                    nib_name.pencolor('white')
+
+                leaf = random.choice(LEAVES)
+                style = ('RootBeer', 10, 'bold')
+                nib_name.color(random.choice(palette))
+                nib_name.write(leaf, font=style)
+                LEAVES.remove(leaf)
 
                 nib_name.color('white')
                 nib_name.backward(length)
@@ -266,14 +263,12 @@ class TreeBuilder:
                 if len(LEAVES) == 0:
                     nib_name.penup()
                     return
-                else:
-                    leaf = random.choice(LEAVES)
-                    style = ('RootBeer', 10, 'bold')
-                    nib_name.pencolor(random.choice(palette))
-                    nib_name.write(leaf, font=style)
-                    LEAVES.remove(leaf)
-                    nib_name.pencolor('white')
-
+  
+                leaf = random.choice(LEAVES)
+                style = ('RootBeer', 10, 'bold')
+                nib_name.color(random.choice(palette))
+                nib_name.write(leaf, font=style)
+                LEAVES.remove(leaf)
                 nib_name.color('white')
                 nib_name.backward(length)
 
@@ -285,7 +280,6 @@ class TreeBuilder:
 
         nib_name.pendown()
         nib_name.color(random.choice(root_palette))
-        nib_name.pencolor(random.choice(root_palette))
         if levels == 0:
 
             if len(ROOTS) == 0:
@@ -293,12 +287,11 @@ class TreeBuilder:
             else:
                 root = random.choice(ROOTS)
                 style = ('RootBeer', 10, 'bold')
-                nib_name.pencolor(random.choice(root_palette))
+                nib_name.color(random.choice(root_palette))
                 nib_name.write(root, font=style, align="right")
                 ROOTS.remove(root)
 
         nib_name.color(random.choice(root_palette))
-        nib_name.pencolor(random.choice(root_palette))
         if levels >= 1:
             nib_name.pendown()
 
@@ -308,7 +301,7 @@ class TreeBuilder:
                 nib_name.width(pensize)
                 # nib_name.forward(length)
                 nib_name.right(angle)
-                nib_name.pencolor(random.choice(root_palette))
+                nib_name.color(random.choice(root_palette))
                 self.asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4, True)
                 nib_name.right(angle)
                 self.asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4, True)
@@ -322,6 +315,7 @@ class TreeBuilder:
                 if len(ROOTS) == 0:
                     nib_name.penup()
                     return
+                
                 nib_name.color(random.choice(root_palette))
                 nib_name.backward(length)
 
