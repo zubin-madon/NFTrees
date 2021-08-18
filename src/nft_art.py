@@ -2,9 +2,59 @@ from turtle import Turtle
 import random
 import turtle
 import math
+import time
 
 from nft_data import NFTData
 from tree_builders import TreeBuilder
+
+
+# Transcrypt random does not have randrange so we monkeypatch it
+# __pragma__ ('ecom')
+'''?
+def random_randrange(start, end, step):
+    rand = random.randint(start, end-1)
+    adj_rand = rand - (rand%step) + (start%step)
+    # print(start, end, step, rand, adj_rand)
+    return adj_rand
+
+random.randrange = random_randrange
+?'''
+# __pragma__ ('noecom')
+
+# Transcrypt turtle does not have write so we monkeypatch it
+# __pragma__ ('ecom')
+# __pragma__ ('kwargs')
+'''?
+from turtle import _svg
+from turtle import _ns
+from turtle import _offset
+
+turtle._text = []
+
+def turtle_reset_text():
+    for text in turtle._text:
+        _svg.removeChild (text)
+        turtle._text = []
+
+turtle.reset_text = turtle_reset_text
+
+
+def turtle_write(self, txt, font=None, align='center'):
+    if not font:
+        font = ('RootBeer', 14, 'bold')
+    text = document.createElementNS(_ns, 'text')
+    text.setAttribute ('x', self.pos()[0] + _offset[0])
+    text.setAttribute ('y', self.pos()[1] + _offset[1])
+    text.setAttribute ('fill', self._pencolor)
+    text.setAttribute ('align', align)
+    text.setAttribute ('style', f'font-size:{font[1]*1.5}px; font-weight:{font[2]}; font-family:{font[0]}, sans-serif;')
+    text.innerHTML = txt
+    _svg.appendChild(text)
+    turtle._text.append (text)
+?'''
+# __pragma__ ('nokwargs')
+# __pragma__ ('noecom')
+
 
 # Fall colour palettes------------------------------------------------------------------- #
 # pallettes https://avemateiu.com/20-fall-color-palettes-2019/
@@ -87,7 +137,7 @@ def nft_draw(nft, tree_seed=None):
             print(f'?seed={new_seed}')
         ?'''
 
-    # ?turtle.reset_text()
+    #?turtle.reset_text()
 # __pragma__ ('ecom')
     
     turtle.delay(0)  # __:skip
@@ -273,7 +323,6 @@ def nft_draw(nft, tree_seed=None):
 # __pragma__ ('skip')
 if __name__ == '__main__':
     import os
-    import time
     from nft_data import ETHERSCAN_KEY
 
     try:
@@ -287,7 +336,7 @@ if __name__ == '__main__':
     screen.setup(width=900, height=900)
     screen.bgcolor('black')
 
-    TEST_ALL = True
+    TEST_ALL = False
     if TEST_ALL:
         from nft_data import test_data
 
