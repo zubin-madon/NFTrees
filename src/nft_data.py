@@ -28,6 +28,7 @@ CURRENT_BLOCK = w3.eth.block_number
 print("CURRENT_BLOCK:", CURRENT_BLOCK)
 
 DEFAULT_ADDRESS = test_data['vip4']
+# DEFAULT_ADDRESS = test_data['NSF_address']
 # __pragma__ ('noskip')
 
 # __pragma__ ('ecom')

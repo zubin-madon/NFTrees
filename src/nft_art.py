@@ -1,11 +1,10 @@
-from turtle import Screen, Turtle
+from turtle import Turtle
 import random
 import turtle
 import math
-from datetime import date, datetime
 
 from nft_data import NFTData
-import tree_builders as tb
+from tree_builders import TreeBuilder
 
 
 # Fall colour palettes------------------------------------------------------------------- #
@@ -68,10 +67,22 @@ def nft_draw(nft, tree_seed=None):
     ROOTS_NEEDED = len(ROOTS)
     print(LEAVES_NEEDED, ROOTS_NEEDED)
     level_tree = 2 if LEAVES_NEEDED == 0 or LEAVES_NEEDED == 1 else round(math.log(LEAVES_NEEDED, 2))
-    level_root = 2 if ROOTS_NEEDED == 0 or ROOTS_NEEDED == 1 else round(math.log(ROOTS_NEEDED, 2))
+    # level_root = 2 if ROOTS_NEEDED == 0 or ROOTS_NEEDED == 1 else round(math.log(ROOTS_NEEDED, 2))
 
     palette = random.choice(LEAF_PALETTES)
     root_palette = random.choice(ROOT_PALETTES)
+
+    if tree_seed:
+        random.seed(tree_seed)
+    else:
+        new_seed = int(time.time() * 1000)
+        random.seed(new_seed)
+        print("seed:", new_seed)  # __:skip
+
+    random.seed(tree_seed)
+    SEQ = [random.random() for _ in range(LEAVES_NEEDED)]
+    tb = TreeBuilder(SEQ)
+    random.seed()
 
     if LEAVES_NEEDED == 0:
         trunk.goto(0, 0)
@@ -177,10 +188,6 @@ def nft_draw(nft, tree_seed=None):
         level_tree = level_tree - 1
         angle_range = [random.randrange(-40, -10, 10), random.randrange(10, 40, 10)]
 
-        #tb.root_function(nib_name=root, ROOTS=ROOTS, length=80, levels=level_root-4, angle=35,
-                                    # root_palette=root_palette, pensize=10)
-
-
         random.random()
         functions_ = [
             (tb.sym_tree,
@@ -196,7 +203,6 @@ def nft_draw(nft, tree_seed=None):
                                  angle=(random.randrange(35, 40, 5)), root_palette=root_palette, pensize=10)
 
         tb.write_labels(nib_name=trunk, x=-300, y=-280, address=nft.address[0:6])
-
 
 
 # __pragma__ ('skip')
@@ -216,7 +222,7 @@ if __name__ == '__main__':
     screen.setup(width=900, height=900)
     screen.bgcolor('black')
 
-    TEST_ALL = True
+    TEST_ALL = False
     if TEST_ALL:
         from nft_data import test_data
 
@@ -230,7 +236,7 @@ if __name__ == '__main__':
     else:
         nftdata = NFTData()
         nftdata.get_data()
-        # nft_draw(nftdata, 1629084036295)
-        nft_draw(nftdata)
+        nft_draw(nftdata, 46)
+        # nft_draw(nftdata)
         screen.mainloop()
 # __pragma__ ('noskip')
