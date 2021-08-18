@@ -100,7 +100,7 @@ def nft_draw(nft, tree_seed=None):
         angle_range = [random.randrange(-60, -30, 10), random.randrange(30, 60, 10)]
         tb.asymmetric_tree_under14(nib_name=tree_one, LEAVES=LEAVES, length=random.randrange(100,140,20),
                                               levels=random.randint(4,5), angle=random.choice(angle_range),
-                                              palette=palette, pensize=10)
+                                              palette=palette, pensize=10, start=True)
         tb.asym_roots(nib_name=root, ROOTS=ROOTS, length=random.randrange(70, 90, 10), levels=3,
                                  angle=(random.randrange(45, 55, 5)), root_palette=root_palette,
                                  pensize=7)
@@ -110,7 +110,7 @@ def nft_draw(nft, tree_seed=None):
     if 15 <= LEAVES_NEEDED <= 30:
         tb.asymmetric_tree_under47(nib_name=tree_one, LEAVES=LEAVES, length=random.randrange(140, 200, 20),
                                               levels=random.randint(4,6), angle=random.randrange(-55, 55, 35),
-                                              palette=palette, pensize=10)
+                                              palette=palette, pensize=10, start=True)
 
         tb.asym_roots(nib_name=root, ROOTS=ROOTS, length=random.randrange(70, 90, 10), levels=3,
                                  angle=(random.randrange(25, 40, 5)), root_palette=root_palette,
@@ -124,7 +124,7 @@ def nft_draw(nft, tree_seed=None):
         (tb.asymmetric_tree_under47, ((tree_one, LEAVES,
                                                   random.randrange(140, 200, 20),
                                                   5, random.randrange(-55, 55, 35),
-                                                  palette, 10)))]
+                                                  palette, 10, True)))]
 
         x = random.choice(functions_)
         x[0](*x[1])
@@ -141,7 +141,7 @@ def nft_draw(nft, tree_seed=None):
         functions_ = [(tb.sym_tree, (tree_one, 130, level_tree, random.randrange(15, 45, 10),
                                0.75, palette, LEAVES, 10)), (tb.asymmetric_tree_under127, (tree_one, LEAVES, random.randrange(120, 160, 20),
                                                6, random.choice(angle_range),
-                                               palette, 10))]
+                                               palette, 10, True))]
         x = random.choice(functions_)
         x[0](*x[1])
 
@@ -156,7 +156,7 @@ def nft_draw(nft, tree_seed=None):
         functions_ = [
             (tb.sym_tree, (tree_one, 130, level_tree, random.randrange(20, 45, 5), 0.75, palette, LEAVES, 10)),
             (tb.asymmetric_tree_under600, (tree_one, LEAVES, random.randrange(120, 140, 20), random.randint(6,8),
-                                                      random.choice(angle_range), palette, 10))
+                                                      random.choice(angle_range), palette, 10, True))
         ]
         x = random.choice(functions_)
         x[0](*x[1])
@@ -174,7 +174,7 @@ def nft_draw(nft, tree_seed=None):
              (tree_one, 120, level_tree, random.randrange(15, 55, 10), 0.75, palette, LEAVES, 10)),
             (tb.asymmetric_tree_under600,
              (tree_one, LEAVES, random.randrange(130, 140, 10), random.randint(8, 9),
-              random.choice(angle_range), palette, 10))
+              random.choice(angle_range), palette, 10, True))
         ]
         x = random.choice(functions_)
         x[0](*x[1])
@@ -194,7 +194,7 @@ def nft_draw(nft, tree_seed=None):
              (tree_one, 120, level_tree, random.randrange(15, 45, 10), 0.8, palette, LEAVES, 10)),
             (tb.asymmetric_tree_under600,
              (tree_one, LEAVES, random.randrange(110, 130, 10), random.randint(9, 10),
-              random.choice(angle_range), palette, 10))
+              random.choice(angle_range), palette, 10, True))
         ]
         x = random.choice(functions_)
         x[0](*x[1])

@@ -2,16 +2,15 @@ from turtle import Turtle
 import random
 
 
-# --- Tree Functions--------
 class TreeBuilder:
     def __init__(self, seq):
         self.seq = seq
 
+    # --- pseudo "randomizer" functions based on predefined sequence
     def get_seq(self):
         for n in self.seq:
             yield n
 
-    # --- pseudo "randomizer" functions based on predefined sequence
     def choose(self, seq, lst):
         return lst[int(next(seq) * len(lst))]
 
@@ -23,6 +22,7 @@ class TreeBuilder:
         adj_rand = rand - (rand % step) + (start % step)
         return adj_rand
 
+    # --- Tree Functions--------
     def multi_turtle_tree(self, palette, LEAVES, angle_step):
         turtles_ = []
         for i in range(len(LEAVES)):
@@ -122,7 +122,7 @@ class TreeBuilder:
 
     # -------------ASYMMETRIC TREE FUNCTION--------------------
 
-    def asymmetric_tree_under14(self, nib_name, LEAVES, length, levels, angle, palette, pensize):
+    def asymmetric_tree_under14(self, nib_name, LEAVES, length, levels, angle, palette, pensize, start=False):
         if len(LEAVES) == 0:
             return
         nib_name.pendown()
@@ -133,7 +133,7 @@ class TreeBuilder:
             nib_name.pendown()
 
             seq = self.get_seq()
-            if next(seq) > 0.5:
+            if start or next(seq) > 0.5:
                 nib_name.width(pensize)
                 nib_name.color('white')
                 nib_name.forward(length)
@@ -161,7 +161,7 @@ class TreeBuilder:
 
     # -------------------------------------------------------------------------------------------------------------------
 
-    def asymmetric_tree_under47(self, nib_name, LEAVES, length, levels, angle, palette, pensize):
+    def asymmetric_tree_under47(self, nib_name, LEAVES, length, levels, angle, palette, pensize, start=False):
         if len(LEAVES) == 0:
             return
         nib_name.pendown()
@@ -170,7 +170,7 @@ class TreeBuilder:
         if levels >= 1:
             nib_name.pendown()
             seq = self.get_seq()
-            if next(seq) > 0.5:
+            if start or next(seq) > 0.5:
                 nib_name.width(pensize)
                 nib_name.color('white')
                 nib_name.forward(length)
@@ -199,7 +199,7 @@ class TreeBuilder:
 
     # ----------------------------------------------------------------------------------------------------------------
 
-    def asymmetric_tree_under127(self, nib_name, LEAVES, length, levels, angle, palette, pensize):
+    def asymmetric_tree_under127(self, nib_name, LEAVES, length, levels, angle, palette, pensize, start=False):
         if len(LEAVES) == 0:
             return
         nib_name.pendown()
@@ -209,7 +209,7 @@ class TreeBuilder:
             nib_name.pendown()
 
             seq = self.get_seq()
-            if next(seq) > 0.5:
+            if start or next(seq) > 0.5:
                 nib_name.width(pensize)
                 nib_name.color('white')
                 nib_name.forward(length)
@@ -239,7 +239,7 @@ class TreeBuilder:
 
     # ---------------------------------------------------------------------------------
 
-    def asymmetric_tree_under600(self, nib_name, LEAVES, length, levels, angle, palette, pensize):
+    def asymmetric_tree_under600(self, nib_name, LEAVES, length, levels, angle, palette, pensize, start=False):
         if len(LEAVES) == 0:
             return
         nib_name.pendown()
@@ -249,18 +249,18 @@ class TreeBuilder:
             nib_name.pendown()
 
             seq = self.get_seq()
-            if next(seq) > 0.5:
+            if start or next(seq) > 0.5:
                 nib_name.width(pensize)
                 nib_name.color('white')
                 nib_name.forward(length)
                 nib_name.right(angle)
-                self.asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
+                self.asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8, start)
                 nib_name.right(angle)
-                self.asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
+                self.asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8,start)
                 nib_name.left(3 * angle)
-                self.asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
+                self.asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8, start)
                 nib_name.left(angle)
-                self.asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8)
+                self.asymmetric_tree_under127(nib_name, LEAVES, length * 0.8, levels - 1, angle, palette, pensize * 0.8, start)
                 nib_name.right(2 * angle)
 
                 if len(LEAVES) == 0:
@@ -303,19 +303,20 @@ class TreeBuilder:
             nib_name.pendown()
 
             seq = self.get_seq()
-            if next(seq) > 0.5:
+            # if next(seq) > 0.5:
+            if next(seq) > 0:
                 nib_name.width(pensize)
                 # nib_name.forward(length)
                 nib_name.right(angle)
                 nib_name.pencolor(random.choice(root_palette))
-                self.asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
+                self.asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4, True)
                 nib_name.right(angle)
-                self.asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
+                self.asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4, True)
                 nib_name.left(3 * angle)
-                self.asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
+                self.asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4, True)
                 nib_name.left(angle)
                 nib_name.color(random.choice(root_palette))
-                self.asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4)
+                self.asymmetric_tree_under127(nib_name, ROOTS, length * 0.9, levels - 1, angle * 0.3, root_palette, pensize * 0.4, True)
                 nib_name.color(random.choice(root_palette))
                 nib_name.right(2 * angle)
                 if len(ROOTS) == 0:
