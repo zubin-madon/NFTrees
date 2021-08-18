@@ -6,7 +6,6 @@ from nft_data import NFTData
 import math
 import tree_builders as tb
 
-
 # Transcrypt random does not have randrange so we monkeypatch it
 # __pragma__ ('ecom')
 '''?
@@ -72,6 +71,7 @@ GOLD_PALETTE = ['#BD574E', '#F67E7D', '#FFAD87', '#843B62']  # root
 
 LEAF_PALETTES = [AUTUMN_COLOURS1, AUTUMN_COLOURS2, AUTUMN_COLOURS6, SPRING_COLOURS, PURPLE_PALETTE]
 ROOT_PALETTES = [AUTUMN_COLOURS3, AUTUMN_COLOURS4, AUTUMN_COLOURS5, AUTUMN_COLOURS7, GOLD_PALETTE]
+variant = random.randint(1, 2)
 
 
 # ----------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ def create_turtles():
         nib.shape('turtle')  # __:skip
         nib.color('white')
         nib.shape('triangle')  # __:skip
-# __pragma__ ('ecom')
+        # __pragma__ ('ecom')
         '''?
         nib.goto(0, 120)
         def write(txt, kwargs):
@@ -96,7 +96,7 @@ def create_turtles():
         
         nib.write = write
         ?'''
-# __pragma__ ('noecom')
+        # __pragma__ ('noecom')
 
         return nib
 
@@ -121,14 +121,14 @@ def nft_draw(nft, tree_seed=None):
         random.seed(new_seed)
         print("seed:", new_seed)  # __:skip
 
-# __pragma__ ('ecom')
+        # __pragma__ ('ecom')
         '''?
         if document.getElementById("mintBtn").disabled:
             print(f'?seed={new_seed}')
         ?'''
 
-    #?turtle.reset_text()
-# __pragma__ ('ecom')
+    # ?turtle.reset_text()
+    # __pragma__ ('ecom')
     turtle.reset()
     turtle.bgcolor("black")
 
@@ -138,15 +138,15 @@ def nft_draw(nft, tree_seed=None):
     root_palette = random.choice(ROOT_PALETTES)
 
     # ---GLOBALS------
-    LEAVES = [(nft.token_id_list[i][0:6]) for i in range(len(nft.token_id_list))]  # ['leaf' for i in range(19)]
-    ROOTS = [(nft.from_address_list[i][0:4]) for i in range(len(nft.from_address_list))]  # ['roots' for i in range (19)]
+    LEAVES = ['leaf' for i in range(500)]  # [(nft.token_id_list[i][0:6]) for i in range(len(nft.token_id_list))]  #
+    ROOTS = ['roots' for i in
+             range(500)]  # [(nft.from_address_list[i][0:4]) for i in range(len(nft.from_address_list))]  #
 
     # total leaves needed = r to the pow(levels). Hence levels = log(leaves, base r)
     LEAVES_NEEDED = len(LEAVES)
     ROOTS_NEEDED = len(ROOTS)
     print(LEAVES_NEEDED, ROOTS_NEEDED)
     level_tree = 2 if LEAVES_NEEDED < 2 else round(math.log(LEAVES_NEEDED, 2))
-    # level_root = 2 if ROOTS_NEEDED < 2 else round(math.log(ROOTS_NEEDED, 2))
     # ----------------------------------------------------------
 
     if LEAVES_NEEDED == 0:
@@ -155,32 +155,18 @@ def nft_draw(nft, tree_seed=None):
 
     elif LEAVES_NEEDED < 8:
         tb.multi_turtle_tree(palette, LEAVES, angle_step=15)
-        tb.asym_roots(nib_name=nibs['root'], ROOTS=ROOTS,
-                      length=random.randrange(70, 90, 10),
-                      levels=3,
-                      angle=(random.randrange(45, 55, 5)),
-                      root_palette=root_palette,
-                      pensize=6)
 
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-195, address=nft.address[0:6])
+        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-195, address=nft.address[0:6], block=nft.block)
 
     elif LEAVES_NEEDED < 15:
         angle_range = [random.randrange(-60, -30, 10), random.randrange(30, 60, 10)]
         tb.asymmetric_tree_under14(nib_name=nibs['tree'],
                                    LEAVES=LEAVES,
                                    length=random.randrange(100, 140, 20),
-                                   levels=random.randint(4, 5),
+                                   levels=5,
                                    angle=random.choice(angle_range),
                                    palette=palette, pensize=10)
-        tb.asym_roots(nib_name=nibs['root'],
-                      ROOTS=ROOTS,
-                      length=random.randrange(70, 90, 10),
-                      levels=3,
-                      angle=(random.randrange(45, 55, 5)),
-                      root_palette=root_palette,
-                      pensize=7)
 
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-260, address=nft.address[0:6])
 
     elif LEAVES_NEEDED < 31:
         tb.asymmetric_tree_under47(nib_name=nibs['tree'],
@@ -192,38 +178,27 @@ def nft_draw(nft, tree_seed=None):
                                    pensize=10,
                                    start=True)
 
-        tb.asym_roots(nib_name=nibs['root'],
-                      ROOTS=ROOTS,
-                      length=random.randrange(70, 90, 10),
-                      levels=3,
-                      angle=(random.randrange(25, 40, 5)),
-                      root_palette=root_palette,
-                      pensize=7)
+        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-260, address=nft.address[0:6], block=nft.block)
 
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-260, address=nft.address[0:6])
 
     elif LEAVES_NEEDED < 48:
+
         functions_ = [
             (tb.sym_tree, (nibs['tree'], LEAVES, 100, level_tree, random.randrange(10, 40, 10), palette, 10, 0.75)),
             (tb.asymmetric_tree_under47,
-             (nibs['tree'], LEAVES, random.randrange(140, 200, 20), 5, random.randrange(-55, 55, 35), palette, 10, True))
+             (
+                 nibs['tree'], LEAVES, random.randrange(140, 200, 20), 5, random.randrange(-55, 55, 35), palette, 10,
+                 True))
         ]
 
         x = random.choice(functions_)
         x[0](*x[1])
 
-        tb.asym_roots(nib_name=nibs['root'],
-                      ROOTS=ROOTS,
-                      length=random.randrange(70, 90, 10),
-                      levels=4,
-                      angle=(random.randrange(25, 40, 5)),
-                      root_palette=root_palette,
-                      pensize=10)
+        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-260, address=nft.address[0:6], block=nft.block)
 
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-260, address=nft.address[0:6])
 
     elif LEAVES_NEEDED < 128:
-        angle_range = [random.randrange(-40, -10, 5), random.randrange(10, 40, 5)]
+        angle_range = [random.randrange(-40, -20, 10), random.randrange(20, 40, 10)]
 
         functions_ = [
             (tb.sym_tree, (nibs['tree'], LEAVES, 130, level_tree, random.randrange(15, 45, 10), palette, 10, 0.75)),
@@ -234,85 +209,120 @@ def nft_draw(nft, tree_seed=None):
         x = random.choice(functions_)
         x[0](*x[1])
 
-        tb.asym_roots(nib_name=nibs['root'],
-                      ROOTS=ROOTS,
-                      length=random.randrange(80, 110, 10),
-                      levels=4,
-                      angle=(random.randrange(25, 40, 5)),
-                      root_palette=root_palette,
-                      pensize=10)
+        tb.write_labels(nib_name=nibs['trunk'], x=-360, y=-360, address=nft.address[0:6], block=nft.block)
 
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-280, address=nft.address[0:6])
 
     elif LEAVES_NEEDED < 301:
-        if 181 < LEAVES_NEEDED <231:
-            level_tree = level_tree-1
+        if 181 < LEAVES_NEEDED < 231:  # do not change this. Under 181 and over 231 level_tree=level_tree
+            level_tree = level_tree - 1
         angle_range = [random.randrange(-45, -15, 10), random.randrange(15, 45, 10)]
+        if LEAVES_NEEDED < 150:
+            asym_tree_level = random.randint(5, 6)
+        else:
+            asym_tree_level = random.randint(6, 8)
         functions_ = [
             (tb.sym_tree, (nibs['tree'], LEAVES, 130, level_tree, random.randrange(20, 45, 5), palette, 10, 0.75)),
             (tb.asymmetric_tree_under600,
-             (nibs['tree'], LEAVES, random.randrange(120, 140, 20), random.randint(6, 8), random.choice(angle_range), palette, 10))
+             (
+                 nibs['tree'], LEAVES, random.randrange(120, 140, 20), asym_tree_level, random.choice(angle_range),
+                 palette,
+                 10, variant))
         ]
 
         x = random.choice(functions_)
         x[0](*x[1])
 
-        tb.asym_roots(nib_name=nibs['root'],
-                      ROOTS=ROOTS,
-                      length=random.randrange(80, 110, 10),
-                      levels=4,
-                      angle=(random.randrange(25, 40, 5)),
-                      root_palette=root_palette,
-                      pensize=10)
+        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-280, address=nft.address[0:6], block=nft.block)
 
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-280, address=nft.address[0:6])
 
     elif LEAVES_NEEDED < 701:
-        if 362 < LEAVES_NEEDED <476:
-            level_tree = level_tree-1
+        if 362 < LEAVES_NEEDED < 476:  # do not change this or simplify.
+            level_tree = level_tree - 1
         angle_range = [random.randrange(-45, -15, 10), random.randrange(15, 45, 10)]
         functions_ = [
             (tb.sym_tree, (nibs['tree'], LEAVES, 120, level_tree, random.randrange(15, 55, 10), palette, 10, 0.75)),
             (tb.asymmetric_tree_under600,
-             (nibs['tree'], LEAVES, random.randrange(130, 140, 10), random.randint(8, 9), random.choice(angle_range), palette, 10))
+             (nibs['tree'], LEAVES, random.randrange(130, 140, 10), random.randint(7, 8), random.choice(angle_range),
+              palette, 10, variant))
         ]
 
         x = random.choice(functions_)
         x[0](*x[1])
 
-        tb.asym_roots(nib_name=nibs['root'],
-                      ROOTS=ROOTS,
-                      length=random.randrange(110, 130, 10),
-                      levels=4,
-                      angle=(random.randrange(30, 40, 5)),
-                      root_palette=root_palette,
-                      pensize=10)
-
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-280, address=nft.address[0:6])
+        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-280, address=nft.address[0:6], block=nft.block)
 
     else:
         level_tree = level_tree - 1
         angle_range = [random.randrange(-40, -10, 10), random.randrange(10, 40, 10)]
 
-        random.random()
         functions_ = [
             (tb.sym_tree, (nibs['tree'], LEAVES, 120, level_tree, random.randrange(15, 45, 10), palette, 10, 0.8)),
             (tb.asymmetric_tree_under600, (
-                nibs['tree'], LEAVES, random.randrange(110, 130, 10), random.randint(9, 10), random.choice(angle_range), palette, 10))
+                nibs['tree'], LEAVES, random.randrange(110, 130, 10), random.randint(9, 10), random.choice(angle_range),
+                palette, 10, variant))
         ]
 
         x = random.choice(functions_)
         x[0](*x[1])
 
-        tb.asym_roots(nib_name=nibs['root'],
-                      ROOTS=ROOTS,
-                      length=random.randrange(80, 110, 10),
-                      levels=5,
-                      angle=(random.randrange(35, 40, 5)),
-                      root_palette=root_palette,
-                      pensize=10)
+    if ROOTS_NEEDED < 48:
+        if ROOTS_NEEDED < 31:
+            level_root = 3
+        else:
+            level_root = 4
+        root_pensize = 6
+        root_angle = (random.randrange(25, 45, 10))
+        root_length = random.randrange(70, 90, 10)
+        x_coord = -300
+        y_coord = -300
 
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-280, address=nft.address[0:6])
+    elif ROOTS_NEEDED < 128:
+        if ROOTS_NEEDED < 119:
+            level_root = 4
+        else:
+            level_root = 5
+        root_pensize = 10
+        root_angle = (random.randrange(30, 40, 10))
+        root_length = random.randrange(100, 120, 10)
+        x_coord = -340
+        y_coord = -340
+    elif ROOTS_NEEDED < 301:
+        if ROOTS_NEEDED < 180:
+            level_root = 4
+        else:
+            level_root = 5
+        root_pensize = 10
+        root_angle = (random.randrange(30, 40, 10))
+        root_length = random.randrange(110, 130, 10)
+        x_coord = -360
+        y_coord = -360
+    elif ROOTS_NEEDED < 701:
+        if ROOTS_NEEDED < 500:
+            level_root = 5
+        else:
+            level_root = 6
+        root_pensize = 10
+        root_angle = (random.randrange(30, 40, 10))
+        root_length = random.randrange(110, 130, 10)
+        x_coord = -400
+        y_coord = -400
+
+    else:
+        if ROOTS_NEEDED < 1150:
+            level_root = 6
+        elif ROOTS_NEEDED < 4000:
+            level_root = 7
+        else:
+            level_root = 8
+        root_pensize = 10
+        root_angle = (random.randrange(30, 40, 10))
+        root_length = random.randrange(100, 120, 10)
+        x_coord = -400
+        y_coord = -400
+
+    tb.asym_roots(nib_name=nibs['root'], ROOTS=ROOTS, length=root_length, levels=level_root, angle=root_angle,
+                  root_palette=root_palette, pensize=root_pensize, variant=variant)
+    tb.write_labels(nib_name=nibs['trunk'], x=x_coord, y=y_coord, address=nft.address[0:6], block=nft.block)
 
 
 # __pragma__ ('skip')
