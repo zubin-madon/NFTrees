@@ -31,6 +31,7 @@ DEFAULT_ADDRESS = test_data['vip_address3']
 # __pragma__ ('noskip')
 
 # __pragma__ ('ecom')
+#?CURRENT_BLOCK = None
 #?DEFAULT_ADDRESS = '0x'
 # __pragma__ ('noecom')
 
