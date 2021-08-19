@@ -3,7 +3,6 @@ import requests
 import os
 from web3 import Web3
 
-
 # -------Key, Etherscan API URLs------------------------
 test_data = dict(
     vip_address2='0x57076ca7a26c16bf301b6d1a7bef96e265d30c3e',
