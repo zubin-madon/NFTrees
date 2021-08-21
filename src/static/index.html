@@ -28,8 +28,9 @@
 
         document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("updateBtn").onclick = () => redraw(nft_address.value);
-               document.getElementById("mintBtn").onclick = () => get_svg(nft_address.value);
+                document.getElementById("mintBtn").onclick = () => get_svg(nft_address.value);
                 document.getElementById("nft_address").value = DEFAULT_ADDRESS;
+                document.getElementById("__turtlegraph__").firstChild.setAttribute('style', 'background-color:black')
             }
         )
     </script>
