@@ -16,6 +16,7 @@ class document:
     createElement = None
 # __pragma__ ('noskip')
 
+
 from urlutils import fetch
 from nft_data import NFTData
 from nft_art import nft_draw
@@ -26,7 +27,7 @@ def redraw(address):
     def _redraw(raw_data):
         data = dict(raw_data)
         try:
-            nftdata = NFTData(data['address'], data['data'])
+            nftdata = NFTData(data['address'], data['data'], data['block'])
 
             querystring = window.location.search
             param_entries = __new__(window.URLSearchParams(querystring)).entries()

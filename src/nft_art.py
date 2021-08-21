@@ -20,8 +20,8 @@ random.randrange = random_randrange
 # __pragma__ ('noecom')
 
 # Transcrypt turtle does not have write so we monkeypatch it
-# __pragma__ ('ecom')
 # __pragma__ ('kwargs')
+# __pragma__ ('ecom')
 '''?
 from turtle import _svg
 from turtle import _ns
@@ -50,8 +50,8 @@ def turtle_write(self, txt, font=None, align='center'):
     _svg.appendChild(text)
     turtle._text.append (text)
 ?'''
-# __pragma__ ('nokwargs')
 # __pragma__ ('noecom')
+# __pragma__ ('nokwargs')
 
 
 # Fall colour palettes------------------------------------------------------------------- #
@@ -88,15 +88,22 @@ def create_turtles():
         nib.shape('turtle')  # __:skip
         nib.color('white')
         nib.shape('triangle')  # __:skip
-        # __pragma__ ('ecom')
+# __pragma__ ('ecom')
         '''?
         nib.goto(0, 120)
         def write(txt, kwargs):
             turtle_write(nib, txt, kwargs)
         
         nib.write = write
+        
+        # Turtle method aliases
+        nib.pencolor = nib.color
+        nib.penup = nib.up
+        nib.pendown = nib.down
+        nib.width = nib.pensize
+        nib.backward = nib.back
         ?'''
-        # __pragma__ ('noecom')
+# __pragma__ ('noecom')
 
         return nib
 
@@ -121,14 +128,14 @@ def nft_draw(nft, tree_seed=None):
         random.seed(new_seed)
         print("seed:", new_seed)  # __:skip
 
-        # __pragma__ ('ecom')
+# __pragma__ ('ecom')
         '''?
         if document.getElementById("mintBtn").disabled:
             print(f'?seed={new_seed}')
         ?'''
 
-    # ?turtle.reset_text()
-    # __pragma__ ('ecom')
+    #?turtle.reset_text()
+# __pragma__ ('noecom')
     turtle.reset()
     turtle.bgcolor("black")
 
@@ -144,7 +151,7 @@ def nft_draw(nft, tree_seed=None):
     # total leaves needed = r to the pow(levels). Hence levels = log(leaves, base r)
     LEAVES_NEEDED = len(LEAVES)
     ROOTS_NEEDED = len(ROOTS)
-    print(LEAVES_NEEDED, ROOTS_NEEDED)
+    print(LEAVES_NEEDED, ROOTS_NEEDED, nft.address[0:6])
     level_tree = 2 if LEAVES_NEEDED < 2 else round(math.log(LEAVES_NEEDED, 2))
     # ----------------------------------------------------------
 
@@ -352,7 +359,7 @@ if __name__ == '__main__':
             screen.update()
             time.sleep(10)
     else:
-        nftdata = NFTData()
+        nftdata = NFTData('0x148e2ED011A9EAAa200795F62889D68153EEacdE')
         nftdata.get_data()
         # nft_draw(nftdata, 1629084036295)
         nft_draw(nftdata)

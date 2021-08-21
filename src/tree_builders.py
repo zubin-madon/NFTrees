@@ -1,4 +1,5 @@
 from turtle import Turtle
+import turtle
 import random
 import time
 
@@ -16,20 +17,38 @@ random.randrange = random_randrange
 # __pragma__ ('noecom')
 
 # Transcrypt turtle does not have write so we monkeypatch it
+# __pragma__ ('kwargs')
 # __pragma__ ('ecom')
 '''?
 from turtle import _svg
 from turtle import _ns
 from turtle import _offset
 
-def turtle_write(self, txt):
+turtle._text = []
+
+def turtle_reset_text():
+    for text in turtle._text:
+        _svg.removeChild (text)
+        turtle._text = []
+
+turtle.reset_text = turtle_reset_text
+
+
+def turtle_write(self, txt, font=None, align='center'):
+    if not font:
+        font = ('RootBeer', 14, 'bold')
     text = document.createElementNS(_ns, 'text')
     text.setAttribute ('x', self.pos()[0] + _offset[0])
     text.setAttribute ('y', self.pos()[1] + _offset[1])
+    text.setAttribute ('fill', self._pencolor)
+    text.setAttribute ('align', align)
+    text.setAttribute ('style', f'font-size:{font[1]*1.5}px; font-weight:{font[2]}; font-family:{font[0]}, sans-serif;')
     text.innerHTML = txt
     _svg.appendChild(text)
+    turtle._text.append (text)
 ?'''
 # __pragma__ ('noecom')
+# __pragma__ ('nokwargs')
 
 
 LEAF_STYLE = ('Indie Flower', 10, 'bold')
@@ -49,9 +68,9 @@ def multi_turtle_tree(palette, LEAVES, angle_step):
         tim.goto(0, -100)
         tim.left(90)
         tim.color("white")
-        # __pragma__ ('ecom')
-        # ?tim.write = lambda txt: turtle_write(nib, txt)
-        # __pragma__ ('noecom')
+# __pragma__ ('ecom')
+        #?tim.write = lambda txt: turtle_write(nib, txt)
+# __pragma__ ('noecom')
         turtles_.append(tim)
 
     for i in range(len(turtles_)):
@@ -342,12 +361,14 @@ def asym_roots(nib_name, ROOTS, length, levels, angle, root_palette, pensize, va
 
 def write_labels(nib_name, x, y, address, block):
     try:
-        # __pragma__ ('ecom')
-        # ?y = -y
-        # __pragma__ ('ecom')
+        new_line = 20
+# __pragma__ ('ecom')
+        #?y = -y
+        #?new_line = -new_line
+# __pragma__ ('ecom')
         nib_name.goto(x, y)
         nib_name.write(address, font=LABEL_STYLE, align='left')
-        nib_name.goto(x, y - 20)
+        nib_name.goto(x, y - new_line)
         nib_name.write(block, font=LABEL_STYLE, align='left')
     except object as e:
         print(e)
