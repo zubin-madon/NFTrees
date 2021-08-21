@@ -90,7 +90,7 @@ def create_turtles():
         nib.shape('triangle')  # __:skip
 # __pragma__ ('ecom')
         '''?
-        nib.goto(0, 120)
+        nib.goto(0, 100)
         def write(txt, kwargs):
             turtle_write(nib, txt, kwargs)
         
@@ -145,8 +145,8 @@ def nft_draw(nft, tree_seed=None):
     root_palette = random.choice(ROOT_PALETTES)
 
     # ---GLOBALS------
-    LEAVES = ['leaf' for i in range(34)] #[(nft.token_id_list[i][0:6]) for i in range(len(nft.token_id_list))]  #
-    ROOTS =  ['roots' for i in range(34)] #[(nft.from_address_list[i][0:4]) for i in range(len(nft.from_address_list))]  #
+    LEAVES = [(nft.token_id_list[i][0:6]) for i in range(len(nft.token_id_list))]  #
+    ROOTS = [(nft.from_address_list[i][0:4]) for i in range(len(nft.from_address_list))]  #
 
     # total leaves needed = r to the pow(levels). Hence levels = log(leaves, base r)
     LEAVES_NEEDED = len(LEAVES)
