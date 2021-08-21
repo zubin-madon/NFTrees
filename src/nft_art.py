@@ -359,7 +359,7 @@ if __name__ == '__main__':
             screen.update()
             time.sleep(10)
     else:
-        nftdata = NFTData('0x148e2ED011A9EAAa200795F62889D68153EEacdE')
+        nftdata = NFTData()
         nftdata.get_data()
         # nft_draw(nftdata, 1629084036295)
         nft_draw(nftdata)
