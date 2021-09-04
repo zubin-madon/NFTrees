@@ -29,8 +29,8 @@ async def get_data(address=None):
     if address:
         nft = NFTData(address)
         nft.get_data()
-        return dict(address=nft.address, data=nft.data)
-    return dict(address='', data='')
+        return dict(address=nft.address, data=nft.data, block=nft.block)
+    return dict(address='', data='', block='')
 
 
 class MintData(BaseModel):
