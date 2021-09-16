@@ -213,8 +213,6 @@ def nft_draw(nft, tree_seed=None):
         x = random.choice(functions_)
         x[0](*x[1])
 
-        tb.write_labels(nib_name=nibs['trunk'], x=-360, y=-360, address=nft.address[0:6], block=nft.block)
-
 
     elif LEAVES_NEEDED < 301:
         if 181 < LEAVES_NEEDED < 231:  # do not change this. Under 181 and over 231 level_tree=level_tree
@@ -236,8 +234,6 @@ def nft_draw(nft, tree_seed=None):
         x = random.choice(functions_)
         x[0](*x[1])
 
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-280, address=nft.address[0:6], block=nft.block)
-
 
     elif LEAVES_NEEDED < 701:
         if 362 < LEAVES_NEEDED < 476:  # do not change this or simplify.
@@ -252,8 +248,6 @@ def nft_draw(nft, tree_seed=None):
 
         x = random.choice(functions_)
         x[0](*x[1])
-
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-280, address=nft.address[0:6], block=nft.block)
 
     else:
         angle_range = [random.randrange(-40, -20, 10), random.randrange(20, 40, 10)]
