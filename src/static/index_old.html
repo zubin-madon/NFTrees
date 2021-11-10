@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NFT Tree</title>
+    <link href='https://fonts.googleapis.com/css?family=Indie Flower' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=ZCOOL QingKe HuangYou' rel='stylesheet'>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #__turtlegraph__ {
+            height: 94%;
+            width: 90%;
+            margin: -1rem auto 0 auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #FFFFFF;
+        }
+    </style>
+    <script type="module">
+        import {redraw, get_svg} from "/__target__/app.js";
+        import {DEFAULT_ADDRESS} from "/__target__/nft_data.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+                document.getElementById("updateBtn").onclick = () => redraw(nft_address.value);
+                document.getElementById("mintBtn").onclick = () => get_svg(nft_address.value);
+                document.getElementById("nft_address").value = DEFAULT_ADDRESS;
+                document.getElementById("__turtlegraph__").firstChild.setAttribute('style', 'background-color:black')
+            }
+        )
+    </script>
+</head>
+<body>
+    <label for="nft_address" style="margin-left: 1rem; margin-top: 1rem;">Wallet Address:</label>
+    <input type="text" id="nft_address" name="nft_address" style="margin-top: 1rem;" size="50">
+    <button type="button" id="updateBtn">Draw</button>
+    <button type="button" id="mintBtn" disabled>Mint</button>
+    <div id="__turtlegraph__"></div>
+</body>
+</html>
