@@ -1,10 +1,20 @@
 import time
-from turtle import Turtle
 import random
-import turtle
-from nft_data import NFTData
 import math
+
+from nft_data import NFTData
 import tree_builders as tb
+
+
+USE_SVG = True
+
+if USE_SVG:
+    from turtle_svg import Turtle
+    import turtle_svg as turtle
+else:
+    from turtle import Turtle
+    import turtle
+
 
 # Transcrypt random does not have randrange so we monkeypatch it
 # __pragma__ ('ecom')
@@ -145,8 +155,8 @@ def nft_draw(nft, tree_seed=None):
     root_palette = random.choice(ROOT_PALETTES)
 
     # ---GLOBALS------
-    LEAVES = ['leaf' for i in range(34)] #[(nft.token_id_list[i][0:6]) for i in range(len(nft.token_id_list))]  #
-    ROOTS = ['roots' for i in range(34)] #[(nft.from_address_list[i][0:4]) for i in range(len(nft.from_address_list))]  #
+    LEAVES = ['leaf' for i in range(34)]  # [(nft.token_id_list[i][0:6]) for i in range(len(nft.token_id_list))]  #
+    ROOTS = ['roots' for i in range(34)]  # [(nft.from_address_list[i][0:4]) for i in range(len(nft.from_address_list))]  #
 
     # total leaves needed = r to the pow(levels). Hence levels = log(leaves, base r)
     LEAVES_NEEDED = len(LEAVES)
@@ -173,7 +183,6 @@ def nft_draw(nft, tree_seed=None):
                                    angle=random.choice(angle_range),
                                    palette=palette, pensize=10)
 
-
     elif LEAVES_NEEDED < 31:
         tb.asymmetric_tree_under47(nib_name=nibs['tree'],
                                    LEAVES=LEAVES,
@@ -183,8 +192,6 @@ def nft_draw(nft, tree_seed=None):
                                    palette=palette,
                                    pensize=10,
                                    start=True)
-
-
 
     elif LEAVES_NEEDED < 48:
 
@@ -199,8 +206,6 @@ def nft_draw(nft, tree_seed=None):
         x = random.choice(functions_)
         x[0](*x[1])
 
-
-
     elif LEAVES_NEEDED < 128:
         angle_range = [random.randrange(-40, -20, 10), random.randrange(20, 40, 10)]
 
@@ -212,7 +217,6 @@ def nft_draw(nft, tree_seed=None):
 
         x = random.choice(functions_)
         x[0](*x[1])
-
 
     elif LEAVES_NEEDED < 301:
         if 181 < LEAVES_NEEDED < 231:  # do not change this. Under 181 and over 231 level_tree=level_tree
@@ -233,7 +237,6 @@ def nft_draw(nft, tree_seed=None):
 
         x = random.choice(functions_)
         x[0](*x[1])
-
 
     elif LEAVES_NEEDED < 701:
         if 362 < LEAVES_NEEDED < 476:  # do not change this or simplify.
@@ -335,11 +338,14 @@ if __name__ == '__main__':
     except Exception as ex:
         print(ex)
 
-    from turtle import Screen
+    if USE_SVG:
+        from turtle_svg import Turtle as Screen
+    else:
+        from turtle import Screen
 
     screen = Screen()
     screen.setup(width=900, height=900)
-    # screen.bgcolor('black')
+    screen.bgcolor('black')
 
     TEST_ALL = False
     if TEST_ALL:
@@ -356,6 +362,6 @@ if __name__ == '__main__':
         nftdata = NFTData()
         nftdata.get_data()
         # nft_draw(nftdata, 1629084036295)
-        nft_draw(nftdata)
+        nft_draw(nftdata, 1636525471084)
         screen.mainloop()
 # __pragma__ ('noskip')
