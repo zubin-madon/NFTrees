@@ -6,7 +6,7 @@ from nft_data import NFTData
 import tree_builders as tb
 
 
-USE_SVG = True
+USE_SVG = False
 
 if USE_SVG:
     from turtle_svg import Turtle

@@ -125,7 +125,7 @@ class Turtle:
         if y is None:
             self._position = x
         else:
-            self._position = [x, y]
+            self._position = [x, -y]
 
         self._track.append('{} {} {}'.format(
             'L' if self._down else 'M',
