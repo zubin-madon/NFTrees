@@ -37,7 +37,6 @@ async def get_data(address=None):
 
 @app.post("/api/draw/")
 async def draw_svg(address: str = Form(...)):
-    print(address)
     if address:
         svg = await get_svg(address)
         return dict(address=address, svg=svg)

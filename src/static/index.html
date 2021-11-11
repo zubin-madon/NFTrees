@@ -72,7 +72,7 @@ $(document).ready(function() {
             type: 'POST',
             cache: false,
             url: '/api/draw/',
-            data: 'address='+$(this).serialize(),
+            data: $(this).serialize(),
             success: function(msg) {
                 $("#__turtlegraph__").html(msg.svg);
             }
