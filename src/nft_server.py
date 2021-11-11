@@ -1,10 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import os
 
 from nft_data import NFTData, ETHERSCAN_KEY
+from nft_art import get_svg
+
 
 '''Convert paths below to absolute paths while testing on local machine'''
 app = FastAPI()
@@ -31,6 +33,15 @@ async def get_data(address=None):
         nft.get_data()
         return dict(address=nft.address, data=nft.data, block=nft.block)
     return dict(address='', data='', block='')
+
+
+@app.post("/api/draw/")
+async def draw_svg(address: str = Form(...)):
+    print(address)
+    if address:
+        svg = await get_svg(address)
+        return dict(address=address, svg=svg)
+    return dict(address='', data='')
 
 
 class MintData(BaseModel):

@@ -6,7 +6,7 @@ from nft_data import NFTData
 import tree_builders as tb
 
 
-USE_SVG = False
+USE_SVG = True
 
 if USE_SVG:
     from turtle_svg import Turtle
@@ -328,16 +328,18 @@ def nft_draw(nft, tree_seed=None):
     tb.write_labels(nib_name=nibs['trunk'], x=x_coord, y=y_coord, address=nft.address[0:6], block=nft.block)
 
 
+async def get_svg(address):
+    svg = Turtle()
+    svg.setup(width=900, height=900)
+    svg.bgcolor('black')
+    nftdata = NFTData(address)
+    nftdata.get_data()
+    nft_draw(nftdata)
+    return str(svg)
+
+
 # __pragma__ ('skip')
-if __name__ == '__main__':
-    import os
-    from nft_data import ETHERSCAN_KEY
-
-    try:
-        os.environ['ETHERSCAN_KEY'] = ETHERSCAN_KEY
-    except Exception as ex:
-        print(ex)
-
+def main():
     if USE_SVG:
         from turtle_svg import Turtle as Screen
     else:
@@ -361,7 +363,20 @@ if __name__ == '__main__':
     else:
         nftdata = NFTData()
         nftdata.get_data()
-        # nft_draw(nftdata, 1629084036295)
+        # nft_draw(nftdata)
         nft_draw(nftdata, 1636525471084)
         screen.mainloop()
+
+
+if __name__ == '__main__':
+    import os
+    from nft_data import ETHERSCAN_KEY
+
+    try:
+        os.environ['ETHERSCAN_KEY'] = ETHERSCAN_KEY
+    except Exception as ex:
+        print(ex)
+
+    # main()
+    print(get_svg('0x2eb5e5713a874786af6da95f6e4deacedb5dc246'))
 # __pragma__ ('noskip')
