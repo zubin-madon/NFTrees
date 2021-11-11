@@ -68,6 +68,7 @@
 $(document).ready(function() {
     $('form[name=drawForm]').submit(function(e){
         e.preventDefault();
+        document.body.style.cursor = 'wait';
         $.ajax({
             type: 'POST',
             cache: false,
@@ -75,6 +76,13 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(msg) {
                 $("#__turtlegraph__").html(msg.svg);
+                document.body.style.cursor = 'default';
+            },
+            error: function(request, status, error) {
+                document.body.style.cursor = 'default';
+                $("#__turtlegraph__").html("");
+                console.log(error);
+                window.alert("Error generating Tree!");
             }
         });
     });
