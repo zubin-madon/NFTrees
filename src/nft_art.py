@@ -63,24 +63,48 @@ def turtle_write(self, txt, font=None, align='center'):
 # __pragma__ ('noecom')
 # __pragma__ ('nokwargs')
 
-
-# Fall colour palettes------------------------------------------------------------------- #
 # pallettes https://avemateiu.com/20-fall-color-palettes-2019/
-AUTUMN_COLOURS1 = ['#D75915', '#D38E10', '#F7E0AC', '#C39367']  # yellow theme (LEAVES)
-AUTUMN_COLOURS2 = ['#ff9136', '#9f1006', '#D23736', '#511a1f', '#380507']  # RED LEAVES
-AUTUMN_COLOURS3 = ['#474c33', '#938a5d', '#e1bf86', '#bf642f', '#242c31']  # ROAD TRIP mix greens/orange pastel(ROOTS)
-# https://looka.com/blog/12-fall-color-palettes/
-AUTUMN_COLOURS4 = ['#F5B3B4', '#D15656', '#94353C', '#694364', '#B58BAB',
-                   '#E3D1E2']  # red light to dark(3) + purple dark to light(3) (ROOTS)
-AUTUMN_COLOURS5 = ['#391615', '#5e2d3b', '#92425f']  # DARK BROWN TO MAROON (ROOTS)
-AUTUMN_COLOURS6 = ['#2f43b5', '#156870', '#016c8c', '#4ebfc7']  # turquoise blue (leaves)
-AUTUMN_COLOURS7 = ['#4e4d49', '#725e45', '#b7946a', '#e2c58d', '#d6cfbf']  # ochre roots (light to dark)
-SPRING_COLOURS = ['#27AA80', '#32FF6A', '#A8FF3E', '#F4FF61']  # GREEN (LEAVES)
-PURPLE_PALETTE = ['#52057B', '#892CDC', '#BC6FF1', '#9D0191']
-GOLD_PALETTE = ['#BD574E', '#F67E7D', '#FFAD87', '#843B62']  # root
+LEAF_PALETTES = {
+    'AutumnAurora': ['#D75915', '#D38E10', '#F7E0AC', '#C39367'], 'RedSunset': ['#ff9136', '#9f1006', '#D23736', '#511a1f'],
+    'GreenCauldron': ['#286140', '#67B080', '#AFCCB6', '#5DA1A3', '#696089'], 'Halloween': ['#C64820', '#CEBCC6', '#dbb0a2', '#653269'],
+    'Turquoise': ['#2f43b5', '#156870', '#016c8c', '#4ebfc7'],
+    'Gourd': ['#b52604', '#e24a07', '#ff9136', '#0c4052', '#125066'],
+    'Lush': ['#27AA80', '#32FF6A', '#A8FF3E', '#F4FF61'],
+    'PurpleHaze': ['#52057B', '#892CDC', '#BC6FF1', '#9D0191'],
+    'MulledWine': ['#163763', '#eec73f', '#d63e16', '#600248'],
+    'PinkSurprise': ['#9d6079', '#fa5770', '#ffa5b9', '#f0d9ea'],
+    'Psychedellic': ['#133072', '#d5e6f7', '#d5adfb', '#f90052'],
+    'Breezy': ['#FAC605', '#C1FFD7', '#B5DEFF', '#CAB8FF'],
+    'WarmSummer': ['#D83A56', '#FF616D', '#FFEAC9', '#66DE93'],
+    'SummerHue': ['#FF9292', '#FFB4B4', '#F1D1D0', '#E4BAD4'],
+    'NeonMix': ['#FFD300', '#DE38C8', '#652EC7', '#B20346'],
+    'LateSummer': ['#CA3422', '#FFA010', '#00AA13', '#578194'],
+    'BlueRain': ['#234d74', '#355e84', '#6c92ab', '#c8d7e6'],
+    'PumpkinSpice': ['#994900', '#c45400', '#d17200', '#f2e3d6'],
+    'Retro': ['#FC95CA', '#FE1C80','#ff5f01', '#ce0000'],
+    'Prism': ['#ffff66', '#fc6e22', '#ff1493', '#c24cf6'],
+    'Ferns': ['#FDC7D7', '#FF9DE6', '#A5D8F3', '#E8E500']
+}
+ROOT_PALETTES = {
+    'DiffusedNeon': ['#CE96FB', '#FF8FCF', '#00C2BA', '#037A90'],
+    'EarthyPastel': ['#B3ABA2', '#C7C1B9', '#A99D8C', '#7E6C59'],
+    'OldForest': ['#D4B29D', '#B69885', '#928D8D', '#66636B'],
+    'NeutralSoil': ['#945F3D', '#D7AD8C', '#E3DECA', '#999A98'],
+    'AutumnHarvest': ['#5e2d3b', '#92425f', '#eaddd0', '#d2c1b0'],
+    'Fall': ['#474c33', '#938a5d', '#e1bf86', '#bf642f', '#242c31'],
+    'Merlot': ['#F5B3B4', '#D15656', '#94353C', '#694364', '#B58BAB', '#E3D1E2'],
+    'Oakwood': ['#391615', '#5e2d3b', '#92425f', '#70052C'],
+    'Ochre': ['#4e4d49', '#725e45', '#b7946a', '#e2c58d', '#d6cfbf'],
+    'PumpkinSpice': ['#994900', '#c45400', '#d17200', '#f2e3d6'],
+    'GoldenCorn': ['#BD574E', '#F67E7D', '#FFAD87', '#843B62'],
+    'Tranquility': ['#d5ddef', '#bcb8ce', '#917898', '#4c394f'],
+    'Eclipse': ['#FF560B', '#ED2D05', '#9C1304', '#6E0A05'],
+    'Winter': ['#3D2C8D', '#916BBF', '#C996CC', '#6E3CBC'],
+    'SpaceShift': ['#3B185F', '#A12568', '#B24080', '#FEC260'],
+    'BlueLagoon': ['#001E6C', '#0F52BA', '#035397', '#5089C6'],
+    'BlueRain': ['#234d74', '#355e84', '#6c92ab', '#c8d7e6']
+}
 
-LEAF_PALETTES = [AUTUMN_COLOURS1, AUTUMN_COLOURS2, AUTUMN_COLOURS6, SPRING_COLOURS, PURPLE_PALETTE]
-ROOT_PALETTES = [AUTUMN_COLOURS3, AUTUMN_COLOURS4, AUTUMN_COLOURS5, AUTUMN_COLOURS7, GOLD_PALETTE]
 variant = random.randint(1, 2)
 
 
@@ -151,8 +175,11 @@ def nft_draw(nft, tree_seed=None):
 
     nibs = create_turtles()
 
-    palette = random.choice(LEAF_PALETTES)
-    root_palette = random.choice(ROOT_PALETTES)
+    leaf_palette_name = random.choice(list(LEAF_PALETTES.keys()))
+    palette = LEAF_PALETTES[leaf_palette_name]
+    root_palette_name = random.choice(list(ROOT_PALETTES.keys()))
+    root_palette = ROOT_PALETTES[root_palette_name]
+    print(leaf_palette_name, root_palette_name)
 
     # ---GLOBALS------
     LEAVES = [(nft.token_id_list[i][0:6]) for i in range(len(nft.token_id_list))]
