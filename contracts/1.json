@@ -1,0 +1,15 @@
+{
+  "name": "#1", //needs to be auto updated
+  "description": "Unique generative trees built out of ERC721 tokens in your wallet.",
+  "image": "https://flexyourtrees.s3.filebase.com/1.svg", // Base CID is https://flexyourtrees.s3.filebase.com
+  "edition": 1, //needs to be auto updated
+  "date": 1634712254574,
+  "creator": "Zubin Madon",
+  "attributes": [
+    {
+      "trait_type": "Leaf Palette",
+      "value": ""}, //To be caught from leaf_palette_name variable in nft_art.py
+      {"trait_type": "Root Palette",
+      "value": ""}, //To be caught from leaf_palette_name variable in nft_art.py
+  ]
+}

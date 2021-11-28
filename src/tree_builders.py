@@ -52,8 +52,8 @@ def turtle_write(self, txt, font=None, align='center'):
 
 
 LEAF_STYLE = ('Indie Flower', 10, 'bold')
-ROOT_STYLE = ('Indie Flower', 10, 'bold')
-LABEL_STYLE = ('ZCOOL QingKe HuangYou', 16, 'bold')
+ROOT_STYLE = ('ZCOOL QingKe HuangYou', 8, 'bold')
+LABEL_STYLE = ('ZCOOL QingKe HuangYou', 12, 'regular')
 
 
 # --- Tree Functions--------

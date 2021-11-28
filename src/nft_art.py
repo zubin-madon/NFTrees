@@ -5,7 +5,6 @@ import math
 from nft_data import NFTData
 import tree_builders as tb
 
-
 USE_SVG = True
 
 if USE_SVG:
@@ -14,7 +13,6 @@ if USE_SVG:
 else:
     from turtle import Turtle
     import turtle
-
 
 # Transcrypt random does not have randrange so we monkeypatch it
 # __pragma__ ('ecom')
@@ -122,7 +120,7 @@ def create_turtles():
         nib.shape('turtle')  # __:skip
         nib.color('white')
         nib.shape('triangle')  # __:skip
-# __pragma__ ('ecom')
+        # __pragma__ ('ecom')
         '''?
         nib.goto(0, 100)
         def write(txt, kwargs):
@@ -137,7 +135,7 @@ def create_turtles():
         nib.width = nib.pensize
         nib.backward = nib.back
         ?'''
-# __pragma__ ('noecom')
+        # __pragma__ ('noecom')
 
         return nib
 
@@ -162,14 +160,14 @@ def nft_draw(nft, tree_seed=None):
         random.seed(new_seed)
         print("seed:", new_seed)  # __:skip
 
-# __pragma__ ('ecom')
+        # __pragma__ ('ecom')
         '''?
         if document.getElementById("mintBtn").disabled:
             print(f'?seed={new_seed}')
         ?'''
 
-    #?turtle.reset_text()
-# __pragma__ ('noecom')
+    # ?turtle.reset_text()
+    # __pragma__ ('noecom')
     turtle.reset()
     turtle.bgcolor("black")
 
