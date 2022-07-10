@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@metamask/onboarding@1.0.1/dist/metamask-onboarding.bundle.js"></script>
     <!-- Bootstrap CSS -->
@@ -39,10 +39,10 @@
 </head>
 <body>
 <!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
--->
+
 <div class="connect-btn">
     <button class="metamask-btn" type="button" id="connectButton" style="float: right;">Connect Metamask</button>
 </div>
@@ -51,7 +51,7 @@
 <form method="POST" name="drawForm">
     <div class="mx-5">
         <div class="input-group mb-3">
-            <input formmethod="POST" name="address" type="text" class="form-control"
+            <input formmethod="POST" name="address" id="treeAddress" type="text" class="form-control"
                    placeholder="Enter your Ethereum Wallet Address" aria-label="Recipient's username"
                    aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -62,6 +62,9 @@
 </form>
 <div id="__turtlegraph__"></div>
 
+<button class="btn btn-outline-secondary" type="button" id="mint-btn">Mint</button>
+
+<script type="text/javascript" src="/static/abi.js"></script>
 <script src="/static/contract.js"></script>
 
 <script type="text/javascript">
@@ -77,6 +80,8 @@ $(document).ready(function() {
             success: function(msg) {
                 $("#__turtlegraph__").html(msg.svg);
                 document.body.style.cursor = 'default';
+
+
             },
             error: function(request, status, error) {
                 document.body.style.cursor = 'default';
