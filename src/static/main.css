@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
 :root {
     --bs-body-bg: #000;
     --bs-body-color: white;
@@ -5,6 +6,10 @@
     --bs-body-font-size: 22px;
 
 
+}
+
+body {
+font-family: 'ZCOOL QingKe HuangYou', cursive !important;
 }
 
 .metamask-btn{
@@ -21,14 +26,12 @@ font-family: 'ZCOOL QingKe HuangYou', cursive;
 
 }
 .metamask-btn:hover{
-background-color: white;
-color: #f36c49
+color: white
 }
 .row{ display: flex; align-items: center;}
 .main-heading{
     color: #ffffff;
     font-family: 'ZCOOL KuaiLe', cursive;
 }
-
 
 

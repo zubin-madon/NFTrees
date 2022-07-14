@@ -38,8 +38,8 @@ async def get_data(address=None):
 @app.post("/api/draw/")
 async def draw_svg(address: str = Form(...)):
     if address:
-        svg = await get_svg(address)
-        return dict(address=address, svg=svg)
+        svg_data = await get_svg(address)
+        return dict(address=address, svg=svg_data[0], leaf_palette_name=svg_data[1], root_palette_name=svg_data[2], block=svg_data[3], root_ball=svg_data[4], branch_ramification=svg_data[5], canopy=svg_data[6])
     return dict(address='', data='')
 
 

@@ -30,6 +30,7 @@ random.randrange = random_randrange
 # Transcrypt turtle does not have write so we monkeypatch it
 # __pragma__ ('kwargs')
 # __pragma__ ('ecom')
+
 '''?
 from turtle import _svg
 from turtle import _ns
@@ -105,7 +106,9 @@ ROOT_PALETTES = {
 
 variant = random.randint(1, 2)
 
-
+level_range = 0
+angle_range = 0
+final_angle = 0
 # ----------------------------------------------------------------------------------------
 
 
@@ -150,6 +153,9 @@ def create_turtles():
 
 
 def nft_draw(nft, tree_seed=None):
+    nft.get_data()
+    print(nft.block)
+    global level_range, angle_range, final_angle
     turtle.delay(0)  # __:skip
     turtle.tracer(0)  # __:skip
 
@@ -177,7 +183,6 @@ def nft_draw(nft, tree_seed=None):
     palette = LEAF_PALETTES[leaf_palette_name]
     root_palette_name = random.choice(list(ROOT_PALETTES.keys()))
     root_palette = ROOT_PALETTES[root_palette_name]
-    print(leaf_palette_name, root_palette_name)
 
     # ---GLOBALS------
     LEAVES = [(nft.token_id_list[i][0:6]) for i in range(len(nft.token_id_list))]
@@ -186,7 +191,6 @@ def nft_draw(nft, tree_seed=None):
     # total leaves needed = r to the pow(levels). Hence levels = log(leaves, base r)
     LEAVES_NEEDED = len(LEAVES)
     ROOTS_NEEDED = len(ROOTS)
-    print(LEAVES_NEEDED, ROOTS_NEEDED, nft.address[0:6])
     level_tree = 2 if LEAVES_NEEDED < 2 else round(math.log(LEAVES_NEEDED, 2))
     # ----------------------------------------------------------
 
@@ -197,15 +201,14 @@ def nft_draw(nft, tree_seed=None):
     elif LEAVES_NEEDED < 8:
         tb.multi_turtle_tree(palette, LEAVES, angle_step=15)
 
-        tb.write_labels(nib_name=nibs['trunk'], x=-300, y=-195, address=nft.address[0:6], block=nft.block)
-
     elif LEAVES_NEEDED < 15:
         angle_range = [random.randrange(-60, -30, 10), random.randrange(30, 60, 10)]
+        final_angle = random.choice(angle_range)
         tb.asymmetric_tree_under14(nib_name=nibs['tree'],
                                    LEAVES=LEAVES,
                                    length=random.randrange(100, 140, 20),
                                    levels=5,
-                                   angle=random.choice(angle_range),
+                                   angle=final_angle,
                                    palette=palette, pensize=10)
 
     elif LEAVES_NEEDED < 31:
@@ -233,11 +236,12 @@ def nft_draw(nft, tree_seed=None):
 
     elif LEAVES_NEEDED < 128:
         angle_range = [random.randrange(-40, -20, 10), random.randrange(20, 40, 10)]
+        final_angle = random.choice(angle_range)
 
         functions_ = [
             (tb.sym_tree, (nibs['tree'], LEAVES, 130, level_tree, random.randrange(15, 45, 10), palette, 10, 0.75)),
             (tb.asymmetric_tree_under127,
-             (nibs['tree'], LEAVES, random.randrange(120, 160, 20), 6, random.choice(angle_range), palette, 10, True))
+             (nibs['tree'], LEAVES, random.randrange(120, 160, 20), 6, final_angle, palette, 10, True))
         ]
 
         x = random.choice(functions_)
@@ -247,6 +251,7 @@ def nft_draw(nft, tree_seed=None):
         if 181 < LEAVES_NEEDED < 231:  # do not change this. Under 181 and over 231 level_tree=level_tree
             level_tree = level_tree - 1
         angle_range = [random.randrange(-45, -15, 10), random.randrange(15, 45, 10)]
+        final_angle = random.choice(angle_range)
         if LEAVES_NEEDED < 150:
             asym_tree_level = random.randint(5, 6)
         else:
@@ -255,7 +260,7 @@ def nft_draw(nft, tree_seed=None):
             (tb.sym_tree, (nibs['tree'], LEAVES, 130, level_tree, random.randrange(20, 45, 5), palette, 10, 0.75)),
             (tb.asymmetric_tree_under600,
              (
-                 nibs['tree'], LEAVES, random.randrange(120, 140, 20), asym_tree_level, random.choice(angle_range),
+                 nibs['tree'], LEAVES, random.randrange(120, 140, 20), asym_tree_level, final_angle,
                  palette,
                  10, variant))
         ]
@@ -267,10 +272,11 @@ def nft_draw(nft, tree_seed=None):
         if 362 < LEAVES_NEEDED < 476:  # do not change this or simplify.
             level_tree = level_tree - 1
         angle_range = [random.randrange(-45, -15, 10), random.randrange(15, 45, 10)]
+        final_angle = random.choice(angle_range)
         functions_ = [
             (tb.sym_tree, (nibs['tree'], LEAVES, 120, level_tree, random.randrange(20, 50, 10), palette, 10, 0.75)),
             (tb.asymmetric_tree_under600,
-             (nibs['tree'], LEAVES, random.randrange(130, 140, 10), random.randint(6, 8), random.choice(angle_range),
+             (nibs['tree'], LEAVES, random.randrange(130, 140, 10), random.randint(6, 8), final_angle,
               palette, 10, variant))
         ]
 
@@ -279,6 +285,7 @@ def nft_draw(nft, tree_seed=None):
 
     else:
         angle_range = [random.randrange(-40, -20, 10), random.randrange(20, 40, 10)]
+        final_angle = random.choice(angle_range)
         if LEAVES_NEEDED < 1500:
             level_range = random.randint(7, 8)
         else:
@@ -286,7 +293,7 @@ def nft_draw(nft, tree_seed=None):
         functions_ = [
             (tb.sym_tree, (nibs['tree'], LEAVES, 120, level_tree, random.randrange(25, 45, 10), palette, 10, 0.8)),
             (tb.asymmetric_tree_under600, (
-                nibs['tree'], LEAVES, random.randrange(130, 150, 10), level_range, random.choice(angle_range),
+                nibs['tree'], LEAVES, random.randrange(130, 150, 10), level_range, final_angle,
                 palette, 10, variant))
         ]
 
@@ -351,16 +358,50 @@ def nft_draw(nft, tree_seed=None):
     tb.asym_roots(nib_name=nibs['root'], ROOTS=ROOTS, length=root_length, levels=level_root, angle=root_angle,
                   root_palette=root_palette, pensize=root_pensize, variant=variant)
     tb.write_labels(nib_name=nibs['trunk'], x=x_coord, y=y_coord, address=nft.address[0:6], block=nft.block)
+    if root_angle < 30 and root_length >= 100:
+        root_ball = "Tight Fibrous"
+    if root_angle < 30 and root_length < 100:
+        root_ball = "Tight Creeping"
+    if 30 <= root_angle <= 40 and root_length >= 100:
+        root_ball = "Adventitious"
+    if 30 <= root_angle <= 40 and root_length < 100:
+        root_ball = "Creeping"
+    if root_angle > 40 and root_length >= 100:
+        root_ball = "Loose Fibrous"
+    if root_angle > 40 and root_length < 100:
+        root_ball = "Loose Creeping"
+    if level_tree >= 7 or level_range >= 7:
+        branch_ramification = "Extensive"
+    if level_tree == 6 or level_range == 6:
+        branch_ramification = "Moderate"
+    if level_tree < 6 or level_range < 6:
+        branch_ramification = "Low"
+    if abs(final_angle) < 30:
+        canopy = "Vase"
+    if 30 <= abs(final_angle) <= 35 and level_tree <= 7:
+        canopy = "Vase"
+    if 30 <= abs(final_angle) <= 35 and 9 > level_tree > 7:
+        canopy = "Spreading"
+    if 30 <= abs(final_angle) <= 35 and level_tree >= 9:
+        canopy = "Spreading"
+    if 35 < abs(final_angle) <= 45 and LEAVES_NEEDED < 1500:
+        canopy = "Spreading"
+    if 35 < abs(final_angle) <= 45 and LEAVES_NEEDED >= 1500:
+        canopy = "Weeping"
+    if abs(final_angle) > 45:
+        canopy = "Weeping"
+    return leaf_palette_name, root_palette_name, nft.block, root_ball, branch_ramification, canopy
+
 
 
 async def get_svg(address):
     svg = Turtle()
-    svg.setup(width=900, height=900)
+    svg.setup(width=1000, height=1000)
     svg.bgcolor('black')
     nftdata = NFTData(address)
     nftdata.get_data()
-    nft_draw(nftdata)
-    return str(svg)
+    leaf_palette_name, root_palette_name, block, root_ball, branch_ramification, canopy = nft_draw(nftdata)
+    return str(svg), leaf_palette_name, root_palette_name, block, root_ball, branch_ramification, canopy
 
 
 # __pragma__ ('skip')
@@ -371,7 +412,7 @@ def main():
         from turtle import Screen
 
     screen = Screen()
-    screen.setup(width=900, height=900)
+    screen.setup(width=1000, height=1000)
     screen.bgcolor('black')
 
     TEST_ALL = False

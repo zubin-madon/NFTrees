@@ -1,73 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Font import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@metamask/onboarding@1.0.1/dist/metamask-onboarding.bundle.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">-->
     <link rel="stylesheet" type="text/css" href="/static/main.css">
     <meta charset="UTF-8">
-    <title>NFTrees</title>
-    <style>
-        .mybtn-right {
-            text-align: right;
-            padding: 100px 100px 100px 100px;
-        }
-
-        .metamask-btn {
-            background-color: #f36c49;
-            padding: 10px 25px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            border: 2px solid #f36c49;
-            font-size: 16px;
-            color: white;
-            transition: 0.4s;
-        }
-
-        .metamask-btn:hover {
-            background-color: white;
-            color: #f36c49
-        }
-    </style>
+    <title>Token Trees</title>
 </head>
-<body>
-<!-- Option 2: Separate Popper and Bootstrap JS -->
+<body class="bg-gradient-to-tl from-gray-700 via-gray-900 to-black text-white">
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
-
-<div class="connect-btn">
-    <button class="metamask-btn" type="button" id="connectButton" style="float: right;">Connect Metamask</button>
+<div class="grid grid-cols-3 gap-4 m-3 grid-flow-row">
+    <!-- col1 -->
+    <div class="flex px-3 align-items-left">
+        <!-- Twitter icon -->
+        <span class="px-5">
+            <svg
+                    class="w-7 h-7 text-gray-400 hover:text-white hover:animate-bounce fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+        <path
+                d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+        />
+        </svg>
+            </span>
+        <!-- Discord -->
+        <span class="px-5">
+         <svg class="w-7 h-7 text-gray-600 fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"> <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"></path> </svg>
+     </span>
+    </div>
+    <!-- col2 -->
+    <div class="justify-content-center self-center align-items-center">
+        <h1 class="text-6xl mt-3 text-center text-responsive">Token Trees</h1>
+    </div>
+    <!-- col3 -->
+    <div class="connect-btn text-end">
+        <button class="metamask-btn hover:bg-orange-500" type="button" id="connectButton">Connect Metamask</button>
+    </div>
 </div>
-<h1 align="center">NFTrees</h1>
 
-<form method="POST" name="drawForm">
-    <div class="mx-5">
-        <div class="input-group mb-3">
-            <input formmethod="POST" name="address" id="treeAddress" type="text" class="form-control"
-                   placeholder="Enter your Ethereum Wallet Address" aria-label="Recipient's username"
+<div class="grid grid-cols-1 gap-4 grid-flow-row text-center">
+    <p class="text-2xl">An NFT Tree of NFTs.<br/> <i class="text-lg text-gray-400">Contract: 0xfc31a6644059d6b56469b340b74b838397d480d7</i></p>
+</div>
+<div class="grid grid-cols-1 gap-4 text-center flex m-5">
+    <form method="POST" name="drawForm">
+        <div class="input-group mb-3 flex justify-center">
+            <input formmethod="POST" name="address" id="treeAddress" type="text" class="form-control md:w-1/2 lg:w-1/3 w-full pl-2 text-black text-xl"
+                   placeholder="Enter Ethereum Wallet Address" aria-label="Recipient's username"
                    aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Generate Tree</button>
+                <button class="btn border-2 border-white px-5 py-2 text-xl hover:bg-gray-400 hover:text-black" type="submit">Generate Tree</button>
             </div>
         </div>
-    </div>
-</form>
-<div id="__turtlegraph__"></div>
+    </form>
+</div>
 
-<button class="btn btn-outline-secondary" type="button" id="mint-btn">Mint</button>
+<div style="text-align:center;" class="grid grid-rows-1 gap-4 grid-flow-row text-center place-content-center">
+    <div class="container text-center text-2xl text-gray-400 border-white" id="__turtlegraph__">
+        <p>Important! Read before you sow!</p>
+        <li class="text-left justify mt-10">
+            'Generate' a tree made up of all the ERC721 tokenIds and addresses in the input wallet.
+        </li>
+        <li class="text-left justify">
+            There are thousands of permutations viz a viz shape and colour.
+        </li>
+        <li class="text-left justify">
+            If you see something you like, mint it! Chances are you won't see that unique
+            combo again for hundreds of clicks.
+        </li>
+        <li class="text-left justify">
+            Generating/ Minting your tree may take a while if there are 1000s of tokens in the wallet. Patience is a virtue.
+        </li>
+        <li class="text-left justify">
+            As your NFT collection grows, keep coming back to mint and watch your wallet tree evolve.
+        </li>
+        <li class="text-left justify mb-10">
+            There will be a MetaForest and gamified lumbering. You can't be kingpin of the timber mafia with just one tree!
+        </li>
+    </div>
+</div>
+<div class="mint text-center m-10">
+        <button class="btn border-2 border-white px-5 py-1 text-2xl hover:bg-gray-400 hover:text-black mx-auto" type="button" id="mint-btn">Mint</button>
+</div>
+
+
+
+<!--- team -->
+
+<section class="text-white body-font p-5 mt-10">
+    <div class="container px-5 mx-auto">
+        <div class="flex flex-col text-center w-full mb-10">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4">Creators</h1>
+        </div>
+        <div class="flex flex-wrap -m-2 justify-between">
+
+            <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                <a href="https://twitter.com/zmadon" target="_blank" rel="noreferrer">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg transform transition duration-300 hover:scale-110 hover:bg-gray-900">
+                        <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="/static/zubin.png">
+                        <div class="flex-grow">
+                            <h2 class="title-font font-medium">Zubin Madon</h2>
+                            <p class="text-gray-400">Founder | Developer </p>
+                            <p class="text-gray-400">Concept | Python Algos | Smart Contract | Dapp</p>
+                        </div>
+                    </div>
+            </div>
+            </a>
+
+
+            <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                <a href="https://twitter.com/JennaSys" target="_blank" rel="noreferrer">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg transform transition duration-300 hover:scale-110 hover:bg-gray-900">
+                        <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="/static/jennasys.png">
+                        <div class="flex-grow">
+                            <h2 class="title-font font-medium">Jennasys</h2>
+                            <p class="text-gray-400">Developer | Maker of CRUD apps | Author of React to Python</p>
+                            <p class="text-gray-400">Python Transcrypt</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+<!-- end -->
+
 
 <script type="text/javascript" src="/static/abi.js"></script>
 <script src="/static/contract.js"></script>
 
 <script type="text/javascript">
+let leafColor, rootColor, rootBall, branchRamification, blockNumber, canopy;
 $(document).ready(function() {
     $('form[name=drawForm]').submit(function(e){
         e.preventDefault();
@@ -79,9 +157,14 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(msg) {
                 $("#__turtlegraph__").html(msg.svg);
+                leafColor=msg.leaf_palette_name;
+                rootColor=msg.root_palette_name;
+                rootBall=msg.root_ball;
+                branchRamification=msg.branch_ramification;
+                blockNumber=msg.block;
+                canopy=msg.canopy;
+
                 document.body.style.cursor = 'default';
-
-
             },
             error: function(request, status, error) {
                 document.body.style.cursor = 'default';
@@ -95,4 +178,7 @@ $(document).ready(function() {
 </script>
 
 </body>
+<footer class="copyright text-center bottom-0 m-10 text-gray-400">
+
+</footer>
 </html>

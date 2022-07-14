@@ -37,10 +37,10 @@ DEFAULT_ADDRESS = test_data['vip_address3']
 
 
 class NFTData:
-    def __init__(self, address=DEFAULT_ADDRESS, data='', block=CURRENT_BLOCK):
+    def __init__(self, address=DEFAULT_ADDRESS, data=''):
         self.address = address
         self.data = data
-        self.block = block
+        self.block = w3.eth.block_number
 
     # __pragma__ ('skip')
     def get_data(self):
@@ -55,6 +55,7 @@ class NFTData:
             response = requests.get(ETHERSCAN_URL + nft_token_transfer_url)
             data = response.json()
             self.data = data['result']
+
         except Exception as e:
             print(e)
     # __pragma__ ('noskip')
