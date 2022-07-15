@@ -13,9 +13,22 @@
     <script src="https://cdn.jsdelivr.net/npm/@metamask/onboarding@1.0.1/dist/metamask-onboarding.bundle.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
-    <!-- Bootstrap CSS -->
-    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"-->
-    <!--          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">-->
+    <!-- Metatags -->
+    <meta property="og:title" content="Token Trees" />
+    <link rel="icon" href="/favicon.ico?v=1.1">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.tokentreesNFT.com" />
+    <meta property="og:image" content="/tokentree_icon.png" />
+    <meta name="twitter:title" content="Token Trees">
+    <meta name="twitter:description" content="NFT Trees built out of ERC721 Tokens">
+    <meta name="twitter:image" content="/tokentree_icon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Token Trees">
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="NFT Trees built out of ERC721 Tokens">
+    <meta property="og:image" content="/tokentree_icon.png">
+    <meta property="og:url" content="https://www.tokentreesNFT.com">
+
     <link rel="stylesheet" type="text/css" href="/static/main.css">
     <meta charset="UTF-8">
     <title>Token Trees</title>
@@ -63,7 +76,7 @@
                    placeholder="Enter Ethereum Wallet Address" aria-label="Recipient's username"
                    aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="btn border-2 border-white px-5 py-2 text-xl hover:bg-gray-400 hover:text-black" type="submit">Generate Tree</button>
+                <button class="btn generate-btn border-2 border-white px-5 py-2 text-xl hover:bg-gray-400 hover:text-black" type="submit">Generate Tree</button>
             </div>
         </div>
     </form>
@@ -150,8 +163,11 @@
 <script type="text/javascript">
 let leafColor, rootColor, rootBall, branchRamification, blockNumber, canopy;
 $(document).ready(function() {
+    let generateBtn = document.querySelector(".generate-btn");
+
     $('form[name=drawForm]').submit(function(e){
         e.preventDefault();
+        generateBtn.innerText = "Loading....";
         document.body.style.cursor = 'wait';
         $.ajax({
             type: 'POST',
@@ -168,12 +184,14 @@ $(document).ready(function() {
                 canopy=msg.canopy;
 
                 document.body.style.cursor = 'default';
+                generateBtn.innerText = "Generate Tree"
             },
             error: function(request, status, error) {
                 document.body.style.cursor = 'default';
                 $("#__turtlegraph__").html("");
                 console.log(error);
                 window.alert("Error generating Tree!");
+                generateBtn.innerText = "Generate Tree"
             }
         });
     });

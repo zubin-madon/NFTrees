@@ -193,7 +193,7 @@ def nft_draw(nft, tree_seed=None):
     ROOTS_NEEDED = len(ROOTS)
     level_tree = 2 if LEAVES_NEEDED < 2 else round(math.log(LEAVES_NEEDED, 2))
     # ----------------------------------------------------------
-
+    print(LEAVES_NEEDED)
     if LEAVES_NEEDED == 0:
         nibs['trunk'].goto(0, 0)
         nibs['trunk'].write("No ERC721 NFTs found. Try another wallet.", align='center')

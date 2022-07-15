@@ -59,6 +59,7 @@ async function logOut() {
 }
 
 async function upload(){
+mintButton.innerText = "In Progress...";
 const mySvg = $("#__turtlegraph__").html();
 currentDate = Date.now();
 console.log(currentDate);
@@ -105,32 +106,33 @@ const metadata = {
   ]
 }
 console.log(metadata)
+const metadataFile = new Moralis.File("metadata.json", {
+  base64: btoa(JSON.stringify(metadata)),
+});
+await metadataFile.saveIPFS();
+const metadataURL = await metadataFile.ipfs();
+
+await Moralis.enableWeb3();
+const sendOptions = {
+  contractAddress: contractAddress,
+  functionName: "mint",
+  abi: contractAbi,
+  msgValue: Moralis.Units.ETH("0.03"),
+  params: {
+    uri: metadataURL,
+  },
+};
+
+const transaction = await Moralis.executeFunction(sendOptions);
+await transaction.wait()
+alert(`Minted Successfully! Txn Hash: ${transaction.hash}`)
+mintButton.innerText = "Mint (0.03 E)";
+
 } catch(err) {
     alert("Generate a tree before minting!");
     console.log(err);
+    mintButton.innerText = "Mint (0.03 E)";
 }
-
-
-//const metadataFile = new Moralis.File("metadata.json", {
-//  base64: btoa(JSON.stringify(metadata)),
-//});
-//await metadataFile.saveIPFS();
-//const metadataURL = await metadataFile.ipfs();
-//
-//await Moralis.enableWeb3();
-//const sendOptions = {
-//  contractAddress: contractAddress,
-//  functionName: "mint",
-//  abi: contractAbi,
-//  msgValue: Moralis.Units.ETH("0.03"),
-//  params: {
-//    uri: metadataURL,
-//  },
-//};
-//
-//const transaction = await Moralis.executeFunction(sendOptions);
-//await transaction.wait()
-//alert(`Minted Successfully! Txn Hash: ${transaction.hash}`)
 
 }
 
