@@ -1,1 +1,1 @@
-uvicorn --app-dir src nft_server:app --reload
+web: uvicorn --app-dir src nft_server:app --reload
