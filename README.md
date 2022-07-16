@@ -22,23 +22,6 @@ $
 
 ---
 
-### demo1 - Snowflake
-(venv) $ `transcrypt --nomin --map src/demos/demo1`  
-(venv) $ `python -m http.server -d ./src/demos`
-
-http://localhost:8000/demo1.html
-
-
-### demo2 - Tree (with user input)
-(venv) $ `transcrypt --nomin --map src/demos/demo2`  
-(venv) $ `python -m http.server -d ./src/demos`
-
-http://localhost:8000/demo2.html
-
-_To generate minified JavaScript w/o sourcemaps, just leave off the flags when running Transcrypt:_  
-(venv) $ `transcrypt src/demo2` 
-
-
 ### Main App
 - _**nft_art.py**_ - entry point (works on both server & client)
 - _**tree_builders.py**_ - tree building algorithms (works on both server & client)
