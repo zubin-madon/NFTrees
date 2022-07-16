@@ -1,1 +1,1 @@
-web: uvicorn --app-dir src nft_server:app --reload
+web: gunicorn --worker-tmp-dir /dev/shm --config gunicorn.conf.py src.nft_server:app
