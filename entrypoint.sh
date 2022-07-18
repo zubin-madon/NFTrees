@@ -1,3 +1,3 @@
 #!/bin/sh
 
-gunicorn --config gunicorn.config.py nft_server:app
+gunicorn --worker-tmp-dir /dev/shm --config gunicorn.config.py nft_server:app
