@@ -110,7 +110,9 @@ const metadataFile = new Moralis.File("metadata.json", {
   base64: btoa(JSON.stringify(metadata)),
 });
 await metadataFile.saveIPFS();
+
 const metadataURL = await metadataFile.ipfs();
+
 
 await Moralis.enableWeb3();
 const sendOptions = {
