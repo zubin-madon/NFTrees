@@ -5,4 +5,5 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 COPY . /app/
+RUN mkdir /app/src/__target__
 ENTRYPOINT [ "bash", "/app/entrypoint.sh" ]
