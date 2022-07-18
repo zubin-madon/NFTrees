@@ -5,11 +5,11 @@
 //dweb:/ipfs/QmNvwMMKxv2yRbXXF7tEFJEApHHBDgt5K7NWfNGgH7cxtJ
 const forwarderOrigin = 'http://localhost:8000'
 const initialize = () => {
-  const serverUrl = "https://fzqqgw1gnhcu.usemoralis.com:2053/server";
-  const appId = "wZRtpBnfIAxoDmOL9rWnH6a9QCWPxSgpcm6iuFeA";
+  const serverUrl = "https://uo5z2mugswff.usemoralis.com:2053/server";
+  const appId = "tyX58ChRjFa22ecfFWA9Z4mWOsUF2WKIX7i5hBWB";
   Moralis.initialize(serverUrl); // Application id from moralis.io
   Moralis.serverURL = appId; //Server url from moralis.io
-  const contractAddress = "0x930061094ec65f7d91199e30DdBd5B0dDdc98Eb6";
+  const contractAddress = "0xfc31a6644059d6b56469b340b74b838397d480d7";
   //Basic Actions Section
   const onboardButton = document.getElementById('connectButton');
   const mintButton = document.querySelector("#mint-btn");
@@ -70,7 +70,7 @@ console.log(mySvg)
 //script ends
 try {
 const metadata = {
-  "name": `WalletTree - ${treeAddress}`, //needs to be auto updated
+  "name": `TokenTree - ${treeAddress}`, //needs to be auto updated
   "description": "Generative trees built out of ERC721 tokens in a wallet.",
   "image_data": mySvg,
   "attributes": [
